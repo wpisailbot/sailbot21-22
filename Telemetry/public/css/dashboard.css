@@ -1,0 +1,128 @@
+/* Location Formatting */
+
+
+/* Common Module Css */
+h6 {
+	display: inline;
+}
+
+.bot-text {
+	display: inline-block;
+	position: relative;
+	margin: 0px;
+	top: 35px;
+}
+
+.datum {
+	z-index: 3;
+}
+
+
+/* Vector Thingy */
+.degree {
+	position: relative;
+	display: inline;
+	top: 45px;
+	left: 95px;
+}
+
+.magnitude {
+	position: relative;
+	display: inline;
+	top: -10px;
+	left: -17px;
+}
+
+/* Compass Stuff */
+.north {
+	position: relative;;
+	display: inline;
+	top: 27px;
+}
+
+.compass {
+	margin-top: 0px;
+}
+
+/* Text Modules */
+.labels {
+	float: left;
+	text-align: right;
+	font-size: 11px;
+	font-weight: bold;
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.values {
+	float: right;
+	text-align: left;
+	font-size: 11px;
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.module {
+	min-height: 50px;
+	width: 100px;
+	margin-top: 45px;
+	margin-bottom: 40px;
+}
+
+/* Options Selection */
+
+.horiList {
+	 display: inline-block;
+	 margin-top: 10px;
+	 margin-left: 20px;
+	 font-size: 1rem;
+}
+
+
+/* TEMP LOCATIONS FOR DEMO */
+
+#map-container{
+	z-index: 0;
+	position: fixed;
+	left: 5vw;
+	top: 2vh;
+}
+
+#mapCanvas{
+	height: 90vh;
+	width: 90vw;
+	position: relative;
+	overflow: hidden;
+}
+
+/*#apparentWind{
+    position: fixed;
+    top: 25vh;
+    left: 7vw;
+}
+
+#theoreticalWind{
+	position: fixed;
+    top: 45vh;
+    left: 6.5vw;
+}
+
+
+
+#pitchroll{
+    position: fixed;
+    top: 65vh;
+    left: 6vw;
+}
+
+#gyro{
+    position: fixed;
+    top: 45vh;
+    left: 85vw;
+}
+
+#humidity{
+    position: fixed;
+    top: 20vh;
+    left: 85vw;
+}*/

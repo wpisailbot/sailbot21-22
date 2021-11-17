@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Sailbot Dashboard</title>
+  <meta name="description" content="Recieves and Displays data from WPI Sailbot">
+  <meta name="author" content="Sailbot Team 20-21">
+
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/simple-grid.min.css">
+  <link rel="stylesheet" href="css/foundation.css">
+  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!-- Dependencies -->
+  <script type="text/javascript" src="/js/dependencies/socket.io.min.js"></script>
+  <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyAqEpMAFofxAxfTmpXh_u_vNm0VDSQ-VqE"></script>
+  <script type="text/javascript" src="/js/dependencies/d3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/dependencies/d3gauge.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/dependencies/FileSaver.min.js" charset="utf-8"></script>
+
+  <!-- Componenents -->
+  <script type="text/javascript" src="js/pitchrollGen.js"></script>
+  <script type="text/javascript" src="js/initGauges.js"></script>
+  <script type="text/javascript" src="js/initVectors.js"></script>
+  <script type="text/javascript" src="js/compassGen.js"></script>
+  
+  <!-- Controllers -->
+  <script type="text/javascript" src="js/socketController.js"></script>
+  <script type="text/javascript" src="js/mapController.js"></script>
+
+  <!-- Startup -->
+  <script type="text/javascript" src="js/startup.js"></script>
+
+  <div>
+    <div id="map-container">
+      <div id="mapCanvas"></div>
+      <div id="options">
+        <button type="button" onclick="exportFile()">Export File</button>
+        <input type="checkbox" id="myCheck" class="horiList" onclick="toggleDebug()"> 
+        <h4 class="horiList">Debug Mode</h4>
+        <h4 class="horiList" style="margin-left: 20px;">Map Center:</h4>
+        <input class="horiList" type="text" id="center" style="width: 100px; display: inline-block;" value="42.8489,-70.9829">
+        <h4 class="horiList" style="margin-left: 20px;">Grid Corners:</h4>
+        <input class="horiList" type="text" id="gridTL" style="width: 100px; display: inline-block;" value="42.854, -70.988">
+        <input class="horiList" type="text" id="gridBL" style="width: 100px; display: inline-block;" value="42.844, -70.988">
+        <input class="horiList" type="text" id="gridTR" style="width: 100px; display: inline-block;" value="42.844, -70.975">
+        <input class="horiList" type="text" id="gridBR" style="width: 100px; display: inline-block;" value="42.853, -70.975">
+        <button type="button" onclick="parseInps()">Submit</button>
+      </div>
+    </div>
+
+    <div class="grid-container fluid">
+      <div id="data-display">
+        <div class="grid-x center">
+          <div class="cell small-3"></div>
+          <div id="coursetrack" class="datum cell small-2">
+            <div id="coursetrackDisp"></div>
+            <h6 id="coursetrackTitle" class="font-heavy">Course Track Error</h6>
+          </div>
+
+
+          <div id="compass" style="margin-top: 0px;" class="datum cell small-2 centered">
+            <div class="north">
+    		  	<h6 id="compassNorth" class="font-light">N</h6>
+            </div>
+            <div id="compassImage"></div>
+            <h6 id="compassTitle" class="font-heavy">Compass</h6>
+          </div>
+
+          <div id="speed" class="datum cell small-2">
+            <div id="speedDisp"></div>
+            <h6 id="speedTitle" class="font-heavy">Ground Speed</h6>
+          </div>
+        </div>
+
+
+        <div class="grid-y" style="height: 60vh;">
+          <div class="cell small-4 grid-x">
+            <div class="datum cell small-2">
+              <div id="apparentWind" class=" center">
+                <div class="degree">
+                  <h6 id="apparentWindAngle" class="font-light">60</h6>
+                  <h6 class="font-light">°</h6>
+                </div>
+                <div class="magnitude">
+                  <h6 id="apparentWindMag" class="font-light">69</h6>
+                  <h6 class="font-light">knots</h6>
+                </div>
+                <div id="apparentWindVector" class="vector"></div>
+                <h6 id="apparentWindTitle" class="bot-text font-heavy">Apparent Wind</h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="cell small-4 grid-x">
+            <div class="datum cell small-2">
+              <div id="theoreticalWind" class="datum cell small-2 center">
+                <div class="degree">
+                  <h6 id="theoreticalWindAngle" class="font-light">113</h6>
+                  <h6 class="font-light">°</h6>
+                </div>
+                <div class="magnitude">
+                  <h6 id="theoreticalWindMag" class="font-light">34</h6>
+                  <h6 class="font-light">knots</h6>
+                </div>
+                <div id="theoreticalWindVector" class="vector"></div>
+                <h6 id="theoreticalWindTitle" class="bot-text font-heavy">True Wind</h6>
+              </div>
+            </div>
+            <div id="gyro" class="datum cell small-2 small-offset-8 center">
+              <div id="gyroDisp" class="module center">
+                <div class="labels">
+                  <text>Phi:</text>
+                  <text>Theta:</text>
+                  <text>Psi:</text>
+                </div>
+                <div class="values">
+                  <text id="phi">420.69</text>
+                  <text id="theta">420</text>
+                  <text id="psi">-420.69</text>
+                </div>
+              </div>
+              <h6 id="gyroTitle" class="font-heavy">Rate Gyro</h6>
+            </div>
+          </div>
+
+          <div class="cell small-4 grid-x">
+            <div class="datum cell small-2">
+              <div id="pitchroll" class="center">
+                <div id="pitchrollDisp"></div>
+                <h6 id="pitchrollTitle" class="font-heavy">Pitch and Roll</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
