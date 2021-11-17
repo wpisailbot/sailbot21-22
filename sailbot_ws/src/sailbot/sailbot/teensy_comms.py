@@ -13,10 +13,10 @@ TRIM_IP = '192.168.0.25' # Use this with the actual Trim Tab - it has a static I
 # TRIM_IP = '127.168.0.1' # Use this with the simulator
 TRIM_PORT = 50000
 BUFFER_SIZE = 50
-# OWN_IP = '192.168.0.21' # This is the actual boat address
+OWN_IP = '192.168.0.21' # This is the actual boat address
 # OWN_IP = '10.0.2.15' # This is for local testing. This is whatever address you use to ssh into the board.
 # OWN_IP = '192.168.0.3' # This is for local testing. This is whatever address you use to ssh into the board.
-OWN_IP = '10.42.0.1'
+# OWN_IP = '10.42.0.1'
 
 OWN_PORT = 50051
 
