@@ -1,10 +1,8 @@
 import rclpy
 from rclpy.node import Node
-import socket
-import json
 import requests
 
-from std_msgs.msg import String
+from std_msgs.msg import String, Float32, Int8
 
 # Website URL and header #
 ip = '192.168.17.20'
@@ -18,7 +16,7 @@ class DebugInterface(Node):
     def __init__(self):
         super().__init__('debug_interface')
         
-        #create subcription to serial_rc topic
+        # Create subcription to serial_rc topic
         self.serial_rc_subscription = self.create_subscription(
             String,
             'serial_rc',
@@ -26,7 +24,7 @@ class DebugInterface(Node):
             10)
         self.serial_rc_subscription
         
-        #create subscription to airmar_data
+        # Create subscription to airmar_data
         self.airmar_data_subscription = self.create_subscription(
             String,
             'airmar_data',
@@ -34,32 +32,37 @@ class DebugInterface(Node):
             10)
         self.airmar_data_subscription
         
-        #create subscription to teensy_status
-        self.teensy_status_subscription = self.create_subscription(
-            String,
-            'teensy_status',
-            self.teensy_status_listener_callback,
+        # Create subscription to tt_telemetry
+        self.trim_tab_telemetry_subscription = self.create_subscription(
+            Float32,
+            'tt_telemetry',
+            self.trim_tab_telemetry_listener_callback,
             10)
-        self.teensy_status_subscription
+        self.trim_tab_telemetry_subscription
 
-        #create subscription to teensy_control
-        self.teensy_control_subscription = self.create_subscription(
-            String,
-            'teensy_control',
-            self.teensy_control_listener_callback,
+        # Create subscription to tt_battery
+        self.trim_tab_battery_subscription = self.create_subscription(
+            Int8,
+            'tt_battery',
+            self.trim_tab_battery_listener_callback,
             10)
-        self.teensy_control_subscription
+        self.trim_tab_battery_subscription
 
-        #create subscription to pwm_control
+        # Create subscription to tt_control
+        self.trim_tab_control_subscription = self.create_subscription(
+            Int8,
+            'tt_control',
+            self.trim_tab_control_listener_callback,
+            10)
+        self.trim_tab_control_subscription
+
+        # Create subscription to pwm_control
         self.pwm_control_subscription = self.create_subscription(
             String,
             'pwm_control',
             self.pwm_control_listener_callback,
             10)
         self.pwm_control_subscription
-        
-    
-        
 
     def serial_rc_listener_callback(self, msg):
         self.get_logger().info('Serial msg: "%s"' % msg.data)
@@ -73,22 +76,22 @@ class DebugInterface(Node):
         # if data is in python dict format:
 	#r = requests.post(url, json=(DATA_HERE))
 
-    def teensy_status_listener_callback(self, msg):
-        self.get_logger().info('Teensy msg: "%s"' % msg.data)
+    def trim_tab_telemetry_listener_callback(self, msg):
+        self.get_logger().info('Trim Tab wind msg: "%s"' % msg.data)
         requests.post(url, data=msg.data, headers=Headers)
 
-    def teensy_control_listener_callback(self, msg):
-        self.get_logger().info('Teensy msg: "%s"' % msg.data)
+    def trim_tab_battery_listener_callback(self, msg):
+        self.get_logger().info('Trim Tab battery msg: "%s"' % msg.data)
+        requests.post(url, data=msg.data, headers=Headers)
+
+    def trim_tab_control_listener_callback(self, msg):
+        self.get_logger().info('Trim Tab control msg: "%s"' % msg.data)
         requests.post(url, data=msg.data, headers=Headers)
         
     def pwm_control_listener_callback(self, msg):
         self.get_logger().info('PWM msg: "%s"' % msg.data)
         requests.post(url, data=msg.data, headers=Headers)
 
-
-    
-
-        
 
 def main(args=None):
     rclpy.init(args=args)

@@ -6,10 +6,11 @@ from launch_ros.actions import Node
 # different terminal window to display each node's
 # callback messages
 
+
 def generate_launch_description():
 	return LaunchDescription([
-		# prefix opens new terminal window
-		# output displays callback messages in terminal
+		# Prefix opens new terminal window
+		# Output displays callback messages in terminal
 		Node(
 			package='sailbot',
 			node_executable='pwm_controller',
@@ -26,8 +27,8 @@ def generate_launch_description():
 		),
 		Node(
 			package='sailbot',
-			node_executable='teensy_comms',
-			name='teensy',
+			node_executable='trim_tab_comms',
+			name='trim_tab',
 			prefix='gnome-terminal --command',
 			output='screen'
 		),
