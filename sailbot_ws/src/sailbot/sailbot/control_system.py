@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 import json
 from std_msgs.msg import String, Float32, Int8
-import sailbot.autonomous.p2p as p2p
+import autonomous.p2p as p2p
 
 class ControlSystem(Node):  # Gathers data from some nodes and distributes it to others
 

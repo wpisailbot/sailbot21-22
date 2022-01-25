@@ -1,2 +1,7 @@
 *.DS_Store
 *.idea/*
+/sailbot_ws/build/
+/sailbot_ws/log/
+/sailbot_ws/install/
+__pycache__/
+*.pyc

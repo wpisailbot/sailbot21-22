@@ -25,6 +25,13 @@
     <exec_depend>serial</exec_depend>
     <exec_depend>smbus2</exec_depend>
     <exec_depend>RPi.GPIO</exec_depend>
+    <exec_depend>Jetson.GPIO</exec_depend>
     <exec_depend>bleak</exec_depend>
+    <exec_depend>sys</exec_depend>
+    <exec_depend>os</exec_depend>
+    <exec_depend>logging</exec_depend>
+    <exec_depend>PIL</exec_depend>
+    <exec_depend>time</exec_depend>
+    <exec_depend>ros2launch</exec_depend>
   </export>
 </package>
