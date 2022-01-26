@@ -201,7 +201,7 @@ class EPaperDisplay():
             string   (str): string to log
             logLevel (int): integer of lowest log level to prompt this log
         """
-        levelStr = ['OFF', 'Disp', 'Busy', 'Some', 'Most']
+        levelStr = 'OFF', 'Disp', 'Busy', 'Some', 'Most'
         header = '[EPD Lib] (' + levelStr[logLevel] + '):    '
         (self.__logLevelSelf > logLevel-1) and self.logger.debug(header + string)
 

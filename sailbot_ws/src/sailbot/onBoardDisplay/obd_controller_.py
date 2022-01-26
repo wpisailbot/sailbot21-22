@@ -38,6 +38,7 @@ class OBDController(Node):
         # Show bootup screen 
         self.debuggingScreen()
         self.bool = True
+        self.epd.sleep()
 
 
     #############################
@@ -53,13 +54,13 @@ class OBDController(Node):
         font20b = ImageFont.truetype(self.fontBoldDir, 20)
 
         # Making an image and draw text for black render
-        HBlackimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 298*126
-        drawblack = ImageDraw.Draw(HBlackimage)
+        Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 298*126
+        drawblack = ImageDraw.Draw(Blackimage)
         drawblack.text((120, 45), 'Boat booting', font = font20b)
         drawblack.text((120, 70), 'Please wait', font = font20)
 
         # Display black and red
-        self.epd.display(self.epd.getbuffer(HBlackimage), gompei.buffer)
+        self.epd.display(self.epd.getbuffer(Blackimage), gompei.buffer)
 
 
     def debuggingScreen(self):
@@ -67,7 +68,24 @@ class OBDController(Node):
         # Telem connected, base station wifi, trim tab wifi, trim tab voltage
         # 
         self.get_logger().info('######### Boat Debug Screen #########')
-        self.oldDebuggingScreen()
+
+        connectedTuple = "STATE:", "TrimTab:", "RC:", "Wifi:", "Jetson:", "BT:"
+        stateTuple = "MODES:", "Wing:", "Ballast:", "Wintch:", "Rudder:", "Tacker:"
+
+        # PIL ImageDraw docs: https://bit.ly/3GZAuUO 
+        Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)
+        drawblack = ImageDraw.Draw(Blackimage)
+
+        # Load font
+        font24 = ImageFont.truetype(self.fontDir, 24)
+
+        # Print both columns of strings and voltage
+        #               (drawObj,        [col1, col2, ...],     xStart, colSpacing, yPadding, fontSize, bold)
+        self.drawColumns(drawblack, (connectedTuple, stateTuple), 10,       120,        5,       16,    True)
+        drawblack.text((225, 0), "14.8V", font = font24)
+
+        # Display created image
+        self.epd.display(self.epd.getbuffer(Blackimage), None)
 
 
     def oldDebuggingScreen(self):
@@ -80,9 +98,9 @@ class OBDController(Node):
         """
         self.get_logger().info('###### 17/18 Boat Debug Screen ######')
 
-        # /\/\/\/ 17/18 Original debugging info \/\/\/\/
-        connectedArray = ["CONNECTED:", "Wing:", "Radio:", "Wifi:", "Jetson:", "BT:"]
-        stateArray = ["MODES:", "Wing:", "Ballast:", "Wintch:", "Rudder:", "Tacker:"]
+        # \/\/\/\/ 17/18 Original debugging info \/\/\/\/
+        connectedTuple = 'CONNECTED:', 'Wing:', 'Radio:', 'Wifi:', 'Jetson:', 'BT:'
+        stateTuple = 'MODES:', 'Wing:', 'Ballast:', 'Wintch:', 'Rudder:', 'Tacker:'
 
         # PIL ImageDraw docs: https://bit.ly/3GZAuUO 
         Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)
@@ -93,7 +111,7 @@ class OBDController(Node):
 
         # Print both columns of strings and voltage
         #               (drawObj,        [col1, col2, ...],     xStart, colSpacing, yPadding, fontSize, bold)
-        self.drawColumns(drawblack, [connectedArray, stateArray], 10,       120,        0,       16,    True)
+        self.drawColumns(drawblack, (connectedTuple, stateTuple), 10,       120,        5,       16,    True)
         drawblack.text((225, 0), "14.8V", font = font24)
 
         # Display created image
@@ -116,7 +134,7 @@ class OBDController(Node):
         """
         font = ImageFont.truetype(self.fontBoldDir if isBold else self.fontDir, fontSize)
         for i in range(0, len(stringList)):
-            self.logForHelpers('Draw List Y: ' + str(round(yOffset+i*spacing)) + ', ' + stringList[i])
+            self.logForHelpers('Draw List Y: ' + str(round(yOffset+i*spacing)) + ', \"' + stringList[i]+ '\"')
             drawObj.text((xOffset, round(yOffset+i*spacing)), stringList[i], font = font)
         return 0
 
@@ -126,18 +144,19 @@ class OBDController(Node):
         # Find spacing from bottom of each line of text (width is 128, height is 298)
             # take usable screen height and divide by number of lines 
             # (abs screen "height" - (top and bot padding) ) / # of lines
-        spacing = (self.epd.width-(yPadding*2)) / len(stringList)
+            # -3 used for top and bottom bounds of screen not centered
+        spacing = (self.epd.width-3-(yPadding*2)) / len(stringList)
         
         # This makes the bottom of the last line of text flush with the padding
         spacing += (spacing-fontSize) / (len(stringList)-1)
 
-        self.logForHelpers('Draw List Fit Spacing: ' + str(spacing)) 
+        self.logForHelpers('Draw List Fit Spacing: ' + str(round(spacing,1))) 
         self.drawListY(drawObj, stringList, xOffset, yPadding, spacing, fontSize, isBold)
 
-    def drawColumns(self, drawObj, arrayOfColumns, xStart, columnSpacing, yPadding, fontSize=16, isBold=True):
-        for i in range(0, len(arrayOfColumns)):
+    def drawColumns(self, drawObj, columns, xStart, columnSpacing, yPadding, fontSize=16, isBold=True):
+        for i in range(0, len(columns)):
             self.logForHelpers('Draw Columns X: ' + str(xStart+columnSpacing*i))
-            self.drawListFitY(drawObj, arrayOfColumns[i], xStart+columnSpacing*i, yPadding, fontSize, isBold)    
+            self.drawListFitY(drawObj, columns[i], xStart+columnSpacing*i, yPadding, fontSize, isBold)    
 
 
     def logForHelpers(self, string):
