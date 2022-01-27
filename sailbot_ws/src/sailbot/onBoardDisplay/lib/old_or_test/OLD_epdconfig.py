@@ -65,7 +65,7 @@
 #             '/usr/lib',
 #         ]
 
-#         # TODO: SWITCH TO NEW SPI LIBRARY!!
+#         # TDO: SWITCH TO NEW SPI LIBRARY!!
 #         # Check func module_exit for reason
 #         # replacements: python-spidev,
 #         # or CircutPython board lib
@@ -85,7 +85,7 @@
 #     def digital_write(self, pin, value):
 #         self.GPIO.output(pin, value)
 
-#     # TODO: refactor out unused pin param
+#     # TDO: refactor out unused pin param
 #     def read_busy(self, pin):
 #         return self.GPIO.input(self.BUSY_PIN)
 
@@ -93,7 +93,7 @@
 #         time.sleep(delaytime / 1000.0)
 
 #     def spi_writebyte(self, data):
-#         self.SPI.SYSFS_software_spi_transfer(data[0]) # TODO: SWITCH TO NEW SPI LIBRARY!!
+#         self.SPI.SYSFS_software_spi_transfer(data[0]) # TDO: SWITCH TO NEW SPI LIBRARY!!
 
 #     def module_init(self):
 #         self.GPIO.setmode(self.GPIO.BOARD)  # BOARD:    Printed pin numbers
@@ -103,14 +103,14 @@
 #         self.GPIO.setup(self.DC_PIN, self.GPIO.OUT)
 #         self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
 #         self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
-#         self.SPI.SYSFS_software_spi_begin() # TODO: SWITCH TO NEW SPI LIBRARY!!
+#         self.SPI.SYSFS_software_spi_begin() # TDO: SWITCH TO NEW SPI LIBRARY!!
 #         return 0
 
 #     def module_exit(self):
 #         self.logger.debug("      spi end")
-#         #self.SPI.SYSFS_software_spi_end()              # TODO: ending custom SPI library locks 
-#                                                         # TODO: ^SPI and needs reboot to re-enable
-#                                                         # TODO: SWITCH TO NEW SPI LIBRARY!!
+#         #self.SPI.SYSFS_software_spi_end()              # TDO: ending custom SPI library locks 
+#                                                         # TDO: ^SPI and needs reboot to re-enable
+#                                                         # TDO: SWITCH TO NEW SPI LIBRARY!!
 #         self.logger.debug("      close 5V, Module enters 0 power consumption ...")
 #         self.GPIO.output(self.RST_PIN, 0)
 #         self.GPIO.output(self.DC_PIN, 0)

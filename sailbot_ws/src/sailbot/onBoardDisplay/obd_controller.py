@@ -19,14 +19,16 @@ class OBDController(Node):
     def __init__(self):
         super().__init__('obd_controller')
 
-        ### NOTE: LOGGER LEVEL ###
+        ### NOTE: ROS LOGGER LEVEL ###
         DEBUG,INFO,WARN,ERROR,FATAL,UNSET=10,20,30,40,50,00
         self.get_logger().set_level(DEBUG) 
 
-        # Initialize E-Paper
-        self.epd = epd_library.EPaperDisplay(self.get_logger())
-        self.epd.setLog(3)
-        self.epd.module_init()
+        # Pass logger to get logs for the EPD Lib
+        # NOTE: EPD Lib logger level explained in epd_library.EPaperDisplay.setLog()
+        self.epd = epd_library.EPaperDisplay(self.get_logger(), 2, False)
+
+        # self.epd = epd_library.EPaperDisplay() #EPD Lib without logger
+        self.epd.module_init()  # Initialize E-Paper
 
         # Load fonts
         self.fontDir = '/usr/share/fonts/truetype/msttcorefonts/Courier_New.ttf'
@@ -36,18 +38,18 @@ class OBDController(Node):
         self.subscription  # prevent unused variable warning
 
         # Show bootup screen 
+        # self.bootingScreen()
+        # self.oldDebuggingScreen()
         self.debuggingScreen()
-        self.bool = True
-        self.epd.sleep()
+        self.epd.shutdown()
 
 
-    #############################
-    ###    Display Screens    ###
-    #############################
+    #####################
+    ###    Screens    ###
+    #####################
 
     def bootingScreen(self):
-        self.get_logger().info('######## Boat Startup Screen ########')
-        self.epd.clear()
+        self.get_logger().info('######## Boat Startup Screen ########\n')
 
         # Load fonts
         font20 = ImageFont.truetype(self.fontDir, 20)
@@ -60,32 +62,34 @@ class OBDController(Node):
         drawblack.text((120, 70), 'Please wait', font = font20)
 
         # Display black and red
-        self.epd.display(self.epd.getbuffer(Blackimage), gompei.buffer)
+        self.epd.clearSRAM()
+        self.epd.printScreen(self.epd.getbuffer(Blackimage), gompei.buffer)
 
 
     def debuggingScreen(self):
 
         # Telem connected, base station wifi, trim tab wifi, trim tab voltage
         # 
-        self.get_logger().info('######### Boat Debug Screen #########')
+        self.get_logger().info('######### Boat Debug Screen #########\n')
 
-        connectedTuple = ('STATE:', 'TrimTab:', 'RC:', 'Wifi:', 'Jetson:', 'BT:')
-        stateTuple = ('MODES:', 'Wing:', 'Ballast:', 'Wintch:', 'Rudder:', 'Tacker:')
+        connectedList = 'STATE:', 'F**K:', 'IT:', 'WORKS:', 'GO', 'needed', 'lines'
+        stateList = 'MODES:', 'YEAH:', 'F***ING:', 'LET\'S:', 'SAILBOT:', 'more', 'yay'
 
         # PIL ImageDraw docs: https://bit.ly/3GZAuUO 
-        Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)
+        Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 298*126
         drawblack = ImageDraw.Draw(Blackimage)
 
         # Load font
         font24 = ImageFont.truetype(self.fontDir, 24)
 
         # Print both columns of strings and voltage
-        #               (drawObj,        [col1, col2, ...],     xStart, colSpacing, yPadding, fontSize, bold)
-        self.drawColumns(drawblack, (connectedTuple, stateTuple), 10,       120,        5,       16,    True)
+        #               (drawObj,        (col1, col2, ...),   xStart, colSpacing, yPadding, fontSize, bold)
+        self.drawColumns(drawblack, (connectedList, stateList), 10,       120,        5,       16,    True)
         drawblack.text((225, 0), "14.8V", font = font24)
 
         # Display created image
-        self.epd.display(self.epd.getbuffer(Blackimage), None)
+        self.epd.clearSRAM()
+        self.epd.printScreen(self.epd.getbuffer(Blackimage), None)
 
 
     def oldDebuggingScreen(self):
@@ -96,11 +100,11 @@ class OBDController(Node):
         PIL ImageDraw docs: https://bit.ly/3GZAuUO 
 
         """
-        self.get_logger().info('###### 17/18 Boat Debug Screen ######')
+        self.get_logger().info('###### 17/18 Boat Debug Screen ######\n')
 
         # \/\/\/\/ 17/18 Original debugging info \/\/\/\/
-        connectedTuple = ('CONNECTED:', 'Wing:', 'Radio:', 'Wifi:', 'Jetson:', 'BT:')
-        stateTuple = ('MODES:', 'Wing:', 'Ballast:', 'Wintch:', 'Rudder:', 'Tacker:')
+        connectedTuple = 'CONNECTED:', 'Wing:', 'Radio:', 'Wifi:', 'Jetson:', 'BT:'
+        stateTuple = 'MODES:', 'Wing:', 'Ballast:', 'Winch:', 'Rudder:', 'Tacker:'
 
         # PIL ImageDraw docs: https://bit.ly/3GZAuUO 
         Blackimage = Image.new('1', (self.epd.height, self.epd.width), 255)
@@ -114,8 +118,10 @@ class OBDController(Node):
         self.drawColumns(drawblack, (connectedTuple, stateTuple), 10,       120,        5,       16,    True)
         drawblack.text((225, 0), "14.8V", font = font24)
 
-        # Display created image
-        self.epd.display(self.epd.getbuffer(Blackimage), None)
+        # Clear any old saved images and print to screen
+        # NOTE: clearSRAM(False, True) would not work, needs fresh SRAM from startup 
+        self.epd.clearSRAM()
+        self.epd.printScreen(self.epd.getbuffer(Blackimage), None)
 
 
 
@@ -159,7 +165,7 @@ class OBDController(Node):
             self.drawListFitY(drawObj, columns[i], xStart+columnSpacing*i, yPadding, fontSize, isBold)    
 
 
-    def logForHelpers(self, string):
+    def logForHelpers(self, string): # TODO: add info option and help() string
         shouldLogHelpers and self.get_logger().debug('(Helper):     ' + string)
 
 
@@ -167,6 +173,8 @@ class OBDController(Node):
     #################################
     ###    Subscriber Callbacks   ###
     #################################
+
+
 
     def updateDisplay(self, msg):
         if self.bool:

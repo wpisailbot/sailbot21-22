@@ -9,11 +9,11 @@
 # # | Info        :   python demo
 # -----------------------------------------------------------------------------
 # Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documnetation files (the "Software"), to deal
+# of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to  whom the Software is
-# furished to do so, subject to the following conditions:
+# furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
@@ -70,140 +70,143 @@ EPD_WIDTH       = 128
 EPD_HEIGHT      = 296
 
 class EPaperDisplay():
-
     """
     This is a class serves as a library to control our e-Paper Display 
+    NOTE: e-Paper works by saving and image to black and red SRAM 
+            then when commanded will display from its SRAM
       
     Attributes:
-        RST_PIN  (int): The pin # connect to the EPD reset pin
-        BUSY_PIN (int): The pin # connect to the EPD busy pin
-        DC_PIN   (int): The pin # connect to the EPD dc pin (dictates command or data)
-        CS_PIN   (int): The pin # connect to the EPD cs pin (dictates command or data)
-        SPI      (obj): The object of Waveshare's custom SPI lib
-        GPIO     (obj): The object of the Jetson.GPIO lib
-        logger   (obj): The ROS2 rclpy logger imported from node (remove to use lib oustode of ROS)
-        width    (int): The pixel width of the EPD (128, short side)
-        height   (int): The pixel height of the EPD (298, long side)
+        RST_PIN         (int): The pin # connect to the EPD reset pin
+        BUSY_PIN        (int): The pin # connect to the EPD busy pin
+        DC_PIN          (int): The pin # connect to the EPD dc pin (dictates command or data)
+        CS_PIN          (int): The pin # connect to the EPD cs pin (dictates command or data)
+        width           (int): The pixel width of the EPD (128, short side)
+        height          (int): The pixel height of the EPD (298, long side)
+        __SPI           (obj): The object of Waveshare's custom SPI lib
+        __GPIO          (obj): The object of the Jetson.GPIO lib
+        __logger        (obj): The ROS2 rclpy logger imported from node (remove to use lib oustode of ROS)
+        __logLevelSelf  (int): The local log level for the EPaperDisplay obj, see __log()
+        __logExclusive 
     """
+
 
     ############################
     ###    Init Functions    ###
     ############################
 
-    def __init__(self, logger):
+    def __init__(self, logger=None, logLevel=0, logLevelExclusive=False):
+        """
+        Declares all class attributes
 
-        # Declare all GPIO pin #'s
-        self.RST_PIN    = 15 #  any digital pin
-        # VCC     -->     17    any 3.3V
-        self.BUSY_PIN   = 18 #  any digital pin
-        # DIN     -->     19    Don't change (SPI1_MOSI)
-        # GND     -->     20    any GND
-        self.DC_PIN     = 22 #  any digital pin
-        # CLK     -->     23    Don't change (SPI1_SCK)
-        self.CS_PIN     = 24 #  Don't change (SPI1_CS0)
-        self.GPIO = Jetson.GPIO
+        Parameters:
+            logger              (obj):  The ROS2 rclpy logger imported from node (remove to use lib oustode of ROS)
+            logLevel            (int):  Level the logger will print for
+            logLevelExclusive   (bool): If logger should print logs for specified level only, default 
+        """
+                                # Declare all GPIO pin #'s
+        self.RST_PIN   = 15     # any digital pin
+        # VCC     -->    17       any 3.3V
+        self.BUSY_PIN  = 18     # any digital pin
+        # DIN     -->    19       Don't change (SPI1_MOSI)
+        # GND     -->    20       any GND
+        self.DC_PIN    = 22     # any digital pin
+        # CLK     -->    23       Don't change (SPI1_SCK)
+        self.CS_PIN    = 24     # Don't change (SPI1_CS0)
+        self.__GPIO = Jetson.GPIO
+       
+        self.__logger = logger  # Import logger from top node 
+        self.setLog(logLevel, logLevelExclusive)  # see setLog()
+        self.__log('EPD Lib declaired, use module_init() to begin', 1)
 
-        # Import logger from top node and set if logging starts on
-        self.logger = logger
-        self.__logLevelSelf = 1 # int (0 none, 1 display, 2 busy, 3 ok Calls, 4 all calls)
-
-        # Set pixel dimentions
-        self.width = EPD_WIDTH
+        self.width = EPD_WIDTH  # Set EPD constants
         self.height = EPD_HEIGHT
+        self.white_buf = (0xff,) * int(self.width * self.height / 8)
 
         # TODO: SWITCH TO NEW SPI LIBRARY!! Check func module_exit for reason
         # replacements: python-spidev, or CircutPython board lib
         # CircutPython example: https://bit.ly/3FXT92a
-        self.SPI = None
+        self.__SPI = None
         find_dir = os.path.dirname(os.path.realpath(__file__))
         so_filename = os.path.join(find_dir, 'sysfs_software_spi.so')
-        self.SPI = ctypes.cdll.LoadLibrary(so_filename)
-        if self.SPI is None:
+        self.__SPI = ctypes.cdll.LoadLibrary(so_filename)
+        if self.__SPI is None:
             raise RuntimeError('Cannot find sysfs_software_spi.so')
 
-    
+
     def module_init(self):
         """
-        This method initializes the e-Paper, after the EPD is ready to print
+        Turns e-Paper on with initializing settings
 
         """
-        # Log call
-        self.log('E-Paper Powerup', 3)
+        if (self.__setupComms() != 0):
+            return -1
 
-        # Setup all GPIO pins
-        self.GPIO.setmode(self.GPIO.BOARD)  # BOARD:    Printed pin numbers
-                                            # BCM:      https://bit.ly/3F8oFtG
-        self.GPIO.setwarnings(False)
-        self.GPIO.setup(self.RST_PIN, self.GPIO.OUT)
-        self.GPIO.setup(self.DC_PIN, self.GPIO.OUT)
-        self.GPIO.setup(self.CS_PIN, self.GPIO.OUT)
-        self.GPIO.setup(self.BUSY_PIN, self.GPIO.IN)
-
-        # Start SPI communication
-        self.SPI.SYSFS_software_spi_begin() # TODO: SWITCH TO NEW SPI LIBRARY!!
-
-        # EPD hardware reset (wakes from deep sleep)
-        self.reset()
-                                                # NOTE: command codes defined at end of file
-        self.send_command(POWER_ON)             # power on
+        self.__log('e-Paper power up', 1)
+        self.__reset()                          # EPD hardware reset (wakes from deep sleep)
+        self.__send_command(POWER_ON)           # power on, NOTE: command codes defined at end of file
         self.readBusy()                         # waiting for the electronic paper IC to release the idle signal
 
-        self.send_command(PANEL_SETTING)        # panel setting
-        self.send_data(0x0f)                    # LUT from OTP,128x296
-        self.send_data(0x89)                    # Temperature sensor, boost and other related timing settings
+        self.__send_command(PANEL_SETTING)      # panel setting
+        self.__send_data(0x0f)                  # LUT from OTP,128x296
+        self.__send_data(0x89)                  # Temperature sensor, boost and other related timing settings
 
-        self.send_command(RESOLUTION_SETTING)   # resolution setting
-        self.send_data (0x80)                   # default
-        self.send_data (0x01)                   # default
-        self.send_data (0x28)                   # default
+        self.__send_command(RESOLUTION_SETTING) # resolution setting
+        self.__send_data (0x80)                 # default
+        self.__send_data (0x01)                 # default
+        self.__send_data (0x28)                 # default
 
-        self.send_command(VCOM_AND_DATA_INTERVAL_SETTING)     # WBRmode:VBDF F7 VBDW 77 VBDB 37  VBDR B7
-        self.send_data(0x77)                                  # WBmode:VBDF 17|D7 VBDW 97 VBDB 57
+        self.__send_command(VCOM_AND_DATA_INTERVAL_SETTING)     # WBRmode:VBDF F7 VBDW 77 VBDB 37  VBDR B7
+        self.__send_data(0x77)                                  # WBmode:VBDF 17|D7 VBDW 97 VBDB 57
 
-        self.send_command(PLL_CONTROL)                        # Sets EPD operation frequency, can be removed 
-        self.send_data(0x3F)                                  # NOTE: No effect to refresh time, can be removed 
+        self.__send_command(PLL_CONTROL)                        # Sets EPD operation frequency, can be removed 
+        self.__send_data(0x3F)                                  # NOTE: No effect to refresh time, can be removed 
+
+        self.clearSRAM()
         return 0
 
-    def reset(self):
+
+    def __setupComms(self):
         """
-        This method resets the EPD hardware and awakes if in deep sleep 
+        Initializes all pin communications, GPIO and SPI
 
         """
-        self.log('RESET', 3)
-        self.GPIO.output(self.RST_PIN, 1)
-        self.delay_ms(200)
-        self.GPIO.output(self.RST_PIN, 0)
-        self.delay_ms(2)
-        self.GPIO.output(self.RST_PIN, 1)
-        self.delay_ms(200)
-    
+        self.__log('SPI + GPIO start', 2)       # Setup all GPIO pins
+        self.__GPIO.setmode(self.__GPIO.BOARD)  # BOARD:    Printed pin numbers
+                                                # BCM:      https://bit.ly/3F8oFtG
+        self.__GPIO.setwarnings(False)
+        self.__GPIO.setup(self.RST_PIN, self.__GPIO.OUT)
+        self.__GPIO.setup(self.DC_PIN, self.__GPIO.OUT)
+        self.__GPIO.setup(self.CS_PIN, self.__GPIO.OUT)
+        self.__GPIO.setup(self.BUSY_PIN, self.__GPIO.IN)
+                                                # Start SPI communication
+        self.__SPI.SYSFS_software_spi_begin()   # TODO: SWITCH TO NEW SPI LIBRARY!!
+        return 0
 
 
-    ###############################
-    ###    Logging Functions    ###
-    ###############################
-
-    def setLog(self, loggerLevel):
+    def __reset(self):
         """
-        This method sets the logging level local to this library
-        0 => Log Off | 1 => Display | 2 => Busy | 3 => Some | 4 => Most
+        Resets the EPD hardware and awakes if in deep sleep 
+
+        """
+        self.__log('Reset', 3)
+        self.__GPIO.output(self.RST_PIN, 1)
+        self.__delay_ms(200)
+        self.__GPIO.output(self.RST_PIN, 0)
+        self.__delay_ms(2)
+        self.__GPIO.output(self.RST_PIN, 1)
+        self.__delay_ms(200)
+        self.__log('Reset done', 3)
+
+        
+    def __delay_ms(self, delaytime):
+        """
+        Halts program using time lib
 
         Parameters:
-            turnOn (int): integer for desired local logging level
+            delaytime (int): amount of time to halt in milliseconds      
         """
-        self.__logLevelSelf = loggerLevel
-
-    def log(self, string, logLevel):
-        """
-        This helper method prints logs for this library formatted correctly
-
-        Parameters:
-            string   (str): string to log
-            logLevel (int): integer of lowest log level to prompt this log
-        """
-        levelStr = 'OFF', 'Disp', 'Busy', 'Some', 'Most'
-        header = '[EPD Lib] (' + levelStr[logLevel] + '):    '
-        (self.__logLevelSelf > logLevel-1) and self.logger.debug(header + string)
+        self.__log('Delay ' + str(delaytime) + 'ms', 4)         
+        time.sleep(delaytime / 1000.0)
 
 
 
@@ -211,28 +214,90 @@ class EPaperDisplay():
     ###    Display Functions    ###
     ###############################
 
+    def setSRAM(self, blackimage, redimage):
+        """
+        Set the black and red SRAM, if None, keep current SRAM
+        NOTE: this does not refresh the display, printScreen() does
+
+        Parameters:
+            blackimage (list): The byte list buffer to save to black SRAM, returned from getbuffer()
+            redimage   (list): The byte list buffer to save to red SRAM, returned from getbuffer()
+        """
+        self.__log('Set SRAM:    ' + 'Black: ' + str(blackimage != None) + ',  Red: ' + str(redimage != None), 2)
+
+        if (blackimage != None):
+            self.__send_command(DATA_START_TRANSMISSION_1) # write black
+            for i in range(0, int(self.width * self.height / 8)):
+                self.__send_data(blackimage[i])
+
+        if (redimage != None):
+            self.__send_command(DATA_START_TRANSMISSION_2) # write red
+            for i in range(0, int(self.width * self.height / 8)):
+                self.__send_data(redimage[i])
+
+
+    def clearSRAM(self, black=True, red=True):
+        """
+        Clears the SRAM by saving and all white buffer
+        NOTE: this does not refresh the display, printScreen() does
+
+        Parameters:
+            black (bool): If true clear black SRAM (Defaults to True)
+            red   (bool): If true clear red SRAM (Defaults to True)
+        """
+        self.__log('Clear SRAM:  ' + 'Black: ' + str(black) + ',  Red: ' + str(red), 2)
+        self.setSRAM(self.white_buf if black else None, self.white_buf if red else None)
+
+
+    def printScreen(self, blackimage=None, redimage=None):                       
+        """
+        Prints the red and black images from SRAM to the e-Paper
+        NOTE: if an image buffer is supplied, it will save it to SRAM then print
+
+        Parameters:
+            blackimage (list): The byte list buffer to print to display, returned from getbuffer()
+            redimage   (list): The byte list buffer to print to dispay, returned from getbuffer()
+        """
+        self.__log('PRINT START', 1)
+        self.setSRAM(blackimage, redimage)
+        self.__send_command(DISPLAY_REFRESH)
+        self.readBusy()
+        self.__log('PRINT DONE', 1)
+
+
+    def clearDisplay(self): 
+        """
+        Clears the screen by clearing both SRAMs and printing
+        Use only after a few screen updates to remove ghosts and shadows
+
+        NOTE: This is the same as printScreen(self.white_buf, self.white_buf)
+        """
+        self.__log('Clear display', 3)
+        self.clearSRAM()
+        self.printScreen()
+
+
     def getbuffer(self, image):
         """
-        This method creates a buffer byte list formatted for display() method
+        Creates a buffer byte list formatted for printScreen() method
 
         Parameters:
             image (byte): a PIL Image object
 
         Returns:
             buf (list): The list of bytes ready to display to screen
-
         """
         
-        buf = [0xFF] * (int(self.width/8) * self.height)
+        buf = list(self.white_buf)
         image_monocolor = image.convert('1')
         imwidth, imheight = image_monocolor.size
         pixels = image_monocolor.load()
 
-        self.log('Buffer size = ' + str(len(buf)), 3)
-        self.log('Image width = ' + str(imwidth) + ', height = ' + str(imheight), 3)
+        self.__log('Buffer size: ' + str(len(buf)), 2)
+        self.__log('Image width, height:  ' + str(imwidth) + ', ' + str(imheight), 2)
 
         if(imwidth == self.width and imheight == self.height):
-            self.log('Image is Vertical', 4)
+            self.__log('Image is vertical', 4)
             for y in range(imheight):
                 for x in range(imwidth):
                     # Set the bits for the column of pixels at the current position.
@@ -240,7 +305,7 @@ class EPaperDisplay():
                         buf[int((x + y * self.width) / 8)] &= ~(0x80 >> (x % 8))
 
         elif(imwidth == self.height and imheight == self.width):
-            self.log('Image is Horizontal', 4)
+            self.__log('Image is horizontal', 4)
             for y in range(imheight):
                 for x in range(imwidth):
                     newx = y
@@ -250,64 +315,41 @@ class EPaperDisplay():
         return buf
 
 
-    def display(self, blackimage, redimage):                       
-        """
-        This method prints the red and black images to the e-Paper
-
-        Parameters:
-            blackimage (list): The byte list buffer returned from getbuffer()
-            redimage   (list): The byte list buffer returned from getbuffer()
-
-        """
-
-        self.log("Print start", 1)
-
-        if (blackimage != None):
-            self.send_command(DATA_START_TRANSMISSION_1)           # write black
-            for i in range(0, int(self.width * self.height / 8)):
-                self.send_data(blackimage[i])
-
-        if (redimage != None):
-            self.send_command(DATA_START_TRANSMISSION_2)           # write red
-            for i in range(0, int(self.width * self.height / 8)):
-                self.send_data(redimage[i])
-
-        self.send_command(DISPLAY_REFRESH)                         # display refresh
-        self.readBusy()
-
-        self.log('Print done', 1)
-
-
-    def clear(self): 
-        """
-        This method clears the screen by displaying all white
-        NOTE: only needs to be used after a few screen updates
-
-        """
-        self.log('Clear', 3)
-
-        white = [0xff] * int(self.width * self.height / 8)
-        self.display(white, white)
-
-
 
     ###########################
     ###    SPI Functions    ###
     ###########################
 
-    def spi_writebyte(self, data):
+    def readBusy(self):
         """
-        This method sends a byte of data over SPI bus
+        Halts until EPD is not busy. EPD goes busy after every command.
+
+        """
+        self.__log('e-Paper busy', 2)
+        self.__send_command(GET_STATUS)                 #  get status (update busy pin)
+        while(self.__GPIO.input(self.BUSY_PIN) == 0):   #  0: idle, 1: busy
+            self.__send_command(GET_STATUS)             #  get status (update busy pin)
+        self.__log('e-Paper busy release', 2)
+
+
+    def __spi_writebyte(self, data):
+        """
+        Sends a byte of data over SPI bus
+        NOTE: needs to be accompanied by DC and CS pin states
 
         TODO: SWITCH TO NEW SPI LIBRARY!! Check func module_exit for reason
         replacements: python-spidev, or CircutPython board lib
         CircutPython example: https://bit.ly/3FXT92a 
-        """
-        self.SPI.SYSFS_software_spi_transfer(data) # TODO: SWITCH TO NEW SPI LIBRARY!!
 
-    def send_command(self, command):
+        Parameters:
+            data (byte): The byte to be sent over SPI
         """
-        This method sends a command to the EPD. DC high and CS low signifies command.
+        self.__SPI.SYSFS_software_spi_transfer(data) # TODO: SWITCH TO NEW SPI LIBRARY!!
+
+
+    def __send_command(self, command):
+        """
+        Sends a command byte to the EPD. DC high and CS low signifies command.
 
         Command codes can be found in variables at end of file or 
         https://www.waveshare.com/w/upload/a/af/2.9inch-e-paper-b-v3-specification.pdf
@@ -316,17 +358,18 @@ class EPaperDisplay():
             command (byte): The byte command to be sent to the EPD
 
         """
-        self.log('Command Sent: ' + str(command), 4)
-        self.GPIO.output(self.DC_PIN, 0)
-        self.GPIO.output(self.CS_PIN, 0)
-        self.spi_writebyte(command)
-        self.GPIO.output(self.CS_PIN, 1)
+        self.__log('Command sent: ' + str(command), 5)
+        self.__GPIO.output(self.DC_PIN, 0)
+        self.__GPIO.output(self.CS_PIN, 0)
+        self.__spi_writebyte(command)
+        self.__GPIO.output(self.CS_PIN, 1)
 
-    def send_data(self, data):
+
+    def __send_data(self, data):
         """
-        This method sends data to the EPD. DC low and CS high signifies command.
+        Send a data byte to the EPD. DC low and CS high signifies command.
 
-        NOTE: Always preceeded by send_command() call.
+        NOTE: Always preceded by __send_command() call.
         \/ Proper command data format can be found in datasheet \/ 
         https://www.waveshare.com/w/upload/a/af/2.9inch-e-paper-b-v3-specification.pdf
 
@@ -334,34 +377,11 @@ class EPaperDisplay():
             data (byte): The byte of data to be sent to the EPD
 
         """
-        self.log('Command Sent: ' + str(data), 4)
-        self.GPIO.output(self.DC_PIN, 1)
-        self.GPIO.output(self.CS_PIN, 0)
-        self.spi_writebyte(data)
-        self.GPIO.output(self.CS_PIN, 1)
-
-    def readBusy(self):
-        """
-        This method haults until EPD is not busy. EPD goes busy after every command.
-
-        """
-        self.log("e-Paper busy", 2)
-
-        self.send_command(GET_STATUS)                 #  get status (update busy pin)
-        while(self.GPIO.input(self.BUSY_PIN) == 0):   #  0: idle, 1: busy
-            self.send_command(GET_STATUS)             #  get status (update busy pin)
-
-        self.log('e-Paper busy release', 2)
-
-    def delay_ms(self, delaytime):
-        """
-        This method haults program using time lib
-
-        Parameters:
-            delaytime (int): amount of time to hault in milliseconds      
-        """
-        self.log('Delay ' + str(delaytime) + 'ms', 3)
-        time.sleep(delaytime / 1000.0)
+        self.__log('Data sent: ' + str(data), 5)
+        self.__GPIO.output(self.DC_PIN, 1)
+        self.__GPIO.output(self.CS_PIN, 0)
+        self.__spi_writebyte(data)
+        self.__GPIO.output(self.CS_PIN, 1)
 
 
 
@@ -369,34 +389,80 @@ class EPaperDisplay():
     ###    Shutdown Functions    ###
     ################################
 
-    def module_exit(self):
+    def shutdown(self):
         """
-        This method exits the EPD, freeing any used GPIO and SPI pins and 
-        FIXME: ending the SPI prevents SPI from starting again without reboot (see TODO/FIXME markers for info)
-
-        """
-
-        self.log('E-Paper Powerdown', 3)
-        # self.SPI.SYSFS_software_spi_end()             # FIXME: ending custom SPI library locks 
-                                                        # FIXME: ^SPI and needs reboot to re-enable
-                                                        # FIXME: SWITCH TO NEW SPI LIBRARY!!
-        self.GPIO.output(self.RST_PIN, 0)
-        self.GPIO.output(self.DC_PIN, 0)
-
-        self.GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN])
-
-    def sleep(self):
-        """
-        This method turns e-Paper off,sends it to deep sleep, ends SPI, and frees GPIO
-        NOTE: call to reset() needed to wake
+        Turns e-Paper off,sends it to deep sleep, ends SPI, and frees GPIO
+        NOTE: have to call module_init() to use EPD again, or maybe just __reset()
 
         """
-        self.log('Sleep', 3)
-        self.send_command(POWER_OFF)    # power off
+        self.__log('e-Paper power down', 1)
+        self.__send_command(POWER_OFF)    # power off
         self.readBusy()
-        self.send_command(DEEP_SLEEP)   # deep sleep
-        self.send_data(0xA5)            # confirmation packet
-        self.module_exit()              # clear up GPIO
+        self.__send_command(DEEP_SLEEP)   # deep sleep
+        self.__send_data(0xA5)            # confirmation packet
+        self.__cleanupComms()             # clear up GPIO
+        self.__log('##### ENDED EPD FUNCTION #####', 1)
+
+
+    def __cleanupComms(self):
+        """
+        Exits the EPD, freeing any used GPIO and SPI pins and 
+        BUG: ending the SPI prevents SPI from starting again without reboot (see TODO/FIXME/BUG markers for info)
+
+        """
+        self.__log('e-Paper pin cleanup', 3)
+        # self.__SPI.SYSFS_software_spi_end()           # BUG: ending custom SPI library locks 
+                                                        # BUG: ^SPI and needs reboot to re-enable
+                                                        # TODO: SWITCH TO NEW SPI LIBRARY!!
+        self.__GPIO.output(self.RST_PIN, 0)
+        self.__GPIO.output(self.DC_PIN, 0)
+        self.__GPIO.cleanup([self.RST_PIN, self.DC_PIN, self.CS_PIN, self.BUSY_PIN])
+
+
+
+    ###############################
+    ###    Logging Functions    ###
+    ###############################
+
+    def setLog(self, level, exclusive=False):
+        """
+        Sets the logging level local to this library 
+        0 ==> No logs
+        1 ==> Lifecycle updates
+        2 ==> Useful debugging data 
+        3 ==> Helper functions
+        4 ==> Rest of method calls except SPI
+        5 ==> Mayhem, all SPI method calls
+
+        Parameters:
+            level     (int):  integer for desired local logging level
+            exclusive (bool): print logs only for defined level, default prints defined
+        """
+        self.__logLevelSelf = level
+        self.__logExclusive = exclusive
+
+        tag = self.__levelTag = 'OFF', 'Life', 'Data', 'Help', 'Misc', 'SPI0'
+        info = 'No logs', 'lifecycle updates', 'useful debugging data', 'helper functions', 'miscellaneous methods', 'SPI'
+        str_a = 'Log Level set to: ' + tag[level] + (' (exclusive)' if exclusive else '')
+        str_b = '. Logs for ' + info[level] + ('' if exclusive else ' and lower') + ' will be printed.'
+        self.__log(str_a + str_b, level)
+        
+
+
+    def __log(self, string, logLevel):
+        """
+        This helper method prints logs for this library formatted correctly
+
+        Parameters:
+            string   (str): string to log
+            logLevel (int): integer of lowest log level to prompt this log
+        """
+        if self.__logger is None:
+            return 0 
+        header = '[EPD Lib] (' + self.__levelTag[logLevel] + '):    '
+        # header = '[EPD Lib]:    '           # NOTE: Uncomment to remove log level tag
+        doLog = (self.__logLevelSelf == logLevel) if self.__logExclusive else (self.__logLevelSelf >= logLevel)
+        doLog and self.__logger.debug(header + string)
 
 
 #####################################
