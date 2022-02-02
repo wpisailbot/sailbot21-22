@@ -34,7 +34,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
 
             if(type_code == 'ROT'): #rate of turn degrees per minute. negative is to port
                 return {"rate-of-turn":args[1]}
-            elif(type_code == 'GLL'):
+            elif(type_code == 'GLL'):                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
                 #convert from degree decimal minutes to decimal degrees
                 #dd = d + m/60
                 #lat = math.floor(float(args[1]) / 100) + (float(args[1]) % 100)/60.0
@@ -99,12 +99,15 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                         "wind-speed-relative-meters":args[3]} #in m/s
             elif(type_code == 'ZDA'): #date & time
                 return {} # unneeded
+            elif(type_code == 'IMU'): #based on this website (https://docs.inertialsense.com/user-manual/com-protocol/ascii/#pimu IMU could be an ASCII message sent over bus), 
+                return {} # IMU DATA
+            
             elif(type_code == 'OUT'): #real key is 'PMAROUT', shortened to OUT, since all others are 3 letters
                 #"PGN is translated to a Maretron proprietary NMEA 0183 sentence " -- used for pitch and roll
                 return {"roll":args[2],
                         "pitch":args[3]}
             else:
-                raise ValueError("Unknown NEMA code: " + type_code)
+                raise ValueError("Unknown NMEA code: " + type_code)
         except Exception as e:
             print(e);
             return({})

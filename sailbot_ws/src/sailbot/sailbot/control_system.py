@@ -1,8 +1,11 @@
+from time import time
 import rclpy
 from rclpy.node import Node
 import json
 from std_msgs.msg import String, Float32, Int8
 import sailbot.autonomous.p2p as p2p
+from collections import deque
+
 
 class ControlSystem(Node):  # Gathers data from some nodes and distributes it to others
 
@@ -46,6 +49,12 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         # Create instance var for keeping queue of wind data
         self.lastWinds = []
         self.p2p_alg = None
+
+        # Create instance var for keeping queue of roll data
+        self.omega = deque(maxlen=4)
+        self.alpha = deque(maxlen=3)
+        self.lastRollAngle = deque(maxlen=4)
+        # self.p2p_alg = None
         
 
     def serial_rc_listener_callback(self, msg):
@@ -113,16 +122,32 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         # Check wind angle, then check current tilt of boat, then adjust ballast accordingly
         if len(self.lastWinds) == 0:
             return
+        self.lastRollAngle.append(self.airmar_data["roll"])
         smooth_angle = self.median(self.lastWinds)
         ballast_angle = 0
         print("roll:" + self.airmar_data["roll"])
-        if 0 < smooth_angle <= 180:  # Starboard tack
+        delta = self.airmar_data["roll"] - self.lastRollAngle[-1]
+        
+
+        timeDifference = .5     #hypothetically - see main
+        omega_n = delta/timeDifference
+        self.omega.append()
+        alpha_n = self.omega[-1]/timeDifference
+        self.alpha.append(alpha_n)
+        #-- Logging ----------------
+        print("omega:" + omega_n)
+        print("alpha:" + alpha_n)
+         #-----------
+         # Starboard tack
+        if 0 < smooth_angle <= 180: 
             # Go for 20 degrees
             if float(self.airmar_data["roll"]) > -12:
                 ballast_angle = 110
             elif float(self.airmar_data["roll"]) < -20:
                 ballast_angle = 80
-        elif 180 < smooth_angle < 360:  # Port tack
+                #-----------
+        # Port tack
+        elif 180 < smooth_angle < 360:  
             if float(self.airmar_data["roll"]) < 12:
                 ballast_angle = 80
             elif float(self.airmar_data["roll"]) > 20:
