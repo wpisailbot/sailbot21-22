@@ -1,0 +1,37 @@
+[0.860s] Invoking command in '/home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level': PYTHONPATH=/home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/low_level build --build-base /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build install --prefix /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level --record /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/install.log --single-version-externally-managed
+[1.096s] running egg_info
+[1.096s] creating build/low_level/low_level.egg-info
+[1.096s] writing build/low_level/low_level.egg-info/PKG-INFO
+[1.097s] writing dependency_links to build/low_level/low_level.egg-info/dependency_links.txt
+[1.097s] writing entry points to build/low_level/low_level.egg-info/entry_points.txt
+[1.097s] writing requirements to build/low_level/low_level.egg-info/requires.txt
+[1.097s] writing top-level names to build/low_level/low_level.egg-info/top_level.txt
+[1.098s] writing manifest file 'build/low_level/low_level.egg-info/SOURCES.txt'
+[1.134s] reading manifest file 'build/low_level/low_level.egg-info/SOURCES.txt'
+[1.135s] writing manifest file 'build/low_level/low_level.egg-info/SOURCES.txt'
+[1.135s] running build
+[1.135s] running build_py
+[1.135s] creating /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build
+[1.135s] creating /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build/lib
+[1.135s] creating /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build/lib/low_level
+[1.135s] copying low_level/__init__.py -> /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build/lib/low_level
+[1.136s] copying low_level/rudder_test.py -> /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build/lib/low_level
+[1.136s] running install
+[1.136s] running install_lib
+[1.138s] creating /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages/low_level
+[1.138s] copying /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build/lib/low_level/__init__.py -> /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages/low_level
+[1.138s] copying /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build/lib/low_level/rudder_test.py -> /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages/low_level
+[1.138s] byte-compiling /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages/low_level/__init__.py to __init__.cpython-38.pyc
+[1.140s] byte-compiling /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages/low_level/rudder_test.py to rudder_test.cpython-38.pyc
+[1.140s] running install_data
+[1.141s] creating /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/share/ament_index
+[1.142s] creating /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/share/ament_index/resource_index
+[1.142s] creating /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/share/ament_index/resource_index/packages
+[1.142s] copying resource/low_level -> /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/share/ament_index/resource_index/packages
+[1.142s] copying package.xml -> /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/share/low_level
+[1.142s] running install_egg_info
+[1.144s] Copying build/low_level/low_level.egg-info to /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages/low_level-0.0.0-py3.8.egg-info
+[1.144s] running install_scripts
+[1.162s] Installing talker script to /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/low_level
+[1.162s] writing list of installed files to '/home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/install.log'
+[1.186s] Invoked command in '/home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level' returned '0': PYTHONPATH=/home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/low_level build --build-base /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/build install --prefix /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/install/low_level --record /home/andrew/Documents/sailbot21-22/sailbot_ws/src/low_level/build/low_level/install.log --single-version-externally-managed
