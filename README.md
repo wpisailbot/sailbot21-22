@@ -50,7 +50,7 @@ From a high level, the nodes are set up with the following intended functionalit
 
 On a per node basis, each node does the following:
 
-The Airmar reader handles the interpretation of all airmar information. The airmar communicates to the Maretron, which the main controller (a Jetson nano in our case) connects to over usb. The Maretron shows NEMA2000 messages which must be decoded into readable format. These messages are then published.
+The Airmar reader handles the interpretation of all airmar information. The airmar communicates to the Maretron, which the main controller (a Jetson nano in our case) connects to over usb. The Maretron shows NMEA2000 messages which must be decoded into readable format. These messages are then published.
 
 The PWM controller handles control of both the rudders and of the ballast. The node takes in messages with a channel and angle. Currently, the rudder is wired to channel 8, and the ballast to channel 12. The rudders move with a servo, so only an angle is needed. The ballast uses a motor controller, so the value will control speed.
 
@@ -116,7 +116,7 @@ If you ever need to refresh your workspace (i.e. you build but it runs old code 
 
 The software in this repository leverages connections to a number of additional subsystems on the boat. The following repositories contain the software for these subsystems:
 
-- Trim Tab ([rigid_wing](https://github.com/wpisailbot/rigit_wing))
+- Trim Tab ([rigid_wing](https://github.com/wpisailbot/rigid_wing))
 - Telemetry Dashboard ([telemetry](https://github.com/wpisailbot/telemetry))
 
 
