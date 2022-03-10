@@ -58,27 +58,43 @@ class TrimTabComms(Node):
 
         # Set up BLE client and attempt to connect
         self.client = BleakClient(ble_address)
+        self.expect_disconnect = False
+        self.client.set_disconnected_callback(self.lost_connection)
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self._ble_connect())
 
+	def lost_connection(self, client):
+		""" Attempt to reconnect if connection is lost unexpectedly """
+		if self.expect_disconnect:
+			return None
+		
+		self.get_logger().info("Lost connection: Attempting to reconnect...")
+		loop = asyncio.get_event_loop()
+		loop.create_task(self._ble_connect())
+
     def disconnect(self):
         """ Disconnect from the trim tab controller """
+        self.expect_disconnect = True
         loop = asyncio.get_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self._ble_disconnect())
 
     async def _ble_connect(self):
-        """
-        Attempt to establish a connection over BLE [Asynchronous]
-        
-        # TODO: If this fails, we may want to try again
-        """
-        try:
-            await self.client.connect()
-            self.get_logger().info("Connected")
-        except Exception as e:
-            self.get_logger().error(str(e))
+        """ Attempt to establish a connection over BLE [Asynchronous] """
+        attempts = 0
+        connected = False
+        while not connected and attempts < 5:
+			try:
+				await self.client.connect()
+				self.get_logger().info("Connected")
+				connected = True
+			except Exception as e:
+				self.get_logger().debug(str(e))
+				attempts += 1
+		
+		if not connected:
+			self.get_logger().error("Failed to connect to trim tab controller. Is it on?")
 
     async def _ble_disconnect(self):
         """ Attempt to disconnect from BLE [Asynchronous] """
