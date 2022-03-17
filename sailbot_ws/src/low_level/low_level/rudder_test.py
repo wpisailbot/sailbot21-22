@@ -21,9 +21,11 @@ class MinimalPublisher(Node):
 
     def timer_callback(self):
         # msg = String()
-        angle = 20
+        angle = [20, 50, 80]
         # msg.data = 'Hello World: %d' % self.i
-        rudder_json = {"channel": "8", "angle": angle}
+        rudder_json = {"channel": "8", "angle": angle[self.i]}
+        self.i += 1
+        self.i %= 3
         rudder_string = self.make_json_string(rudder_json)
         self.publisher_.publish(rudder_string)
         self.get_logger().info('Publishing: "%s"' % rudder_string)
