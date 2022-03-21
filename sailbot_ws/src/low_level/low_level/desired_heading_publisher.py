@@ -10,7 +10,7 @@ class DesiredHeading(Node):
     def __init__(self):
         super().__init__('Desired_Heading')
         self.publisher_ = self.create_publisher(Int64, 'd_heading', 10)
-        self.subscription = self.create_subscription(String, '')
+        self.subscription = self.create_subscription(String, '/airmar')
         timer_period = 10  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
 
