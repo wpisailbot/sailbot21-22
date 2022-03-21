@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'rudder_test = low_level.rudder_test:main',
+            'desired_heading = low_level.desired_heading_publisher:main',
         ],
     },
 )
