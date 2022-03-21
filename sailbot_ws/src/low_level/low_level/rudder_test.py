@@ -21,7 +21,7 @@ class MinimalPublisher(Node):
 
     def timer_callback(self):
         # msg = String()
-        angle = [20, 50, 80]
+        angle = [25, 70, 115]  # port limit, middle ground, starboard limit
         # msg.data = 'Hello World: %d' % self.i
         rudder_json = {"channel": "8", "angle": angle[self.i]}
         self.i += 1
