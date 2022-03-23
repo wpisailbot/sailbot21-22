@@ -41,6 +41,9 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         # Create publisher to trim_tab_control
         self.trim_tab_control_publisher_ = self.create_publisher(Int8, 'tt_control', 10)
 
+        # Create publisher to ballast_algorithnm_debug
+        self.ballast_algorithnm_debug_publisher_ = self.create_publisher(String, 'ballast_algorithnm_debug', 10)
+
         # Create instance vars for subscribed topics to update
         self.serial_rc = {}
         self.airmar_data = {}
@@ -89,7 +92,7 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         smooth_angle = self.median(self.lastWinds)
         return smooth_angle
 
-    def find_trim_tab_state(self, relative_wind):
+    def find_trim_tab_state(self, relative_wind):           #five states of trim
         smooth_angle = self.update_winds(relative_wind)
         if 45.0 <= smooth_angle < 135:
             # Max lift port
@@ -125,25 +128,26 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         self.lastRollAngle.append(self.airmar_data["roll"])
         smooth_angle = self.median(self.lastWinds)
         ballast_angle = 0
-        print("roll:" + self.airmar_data["roll"])
+        #print("roll:" + self.airmar_data["roll"])
         delta = self.airmar_data["roll"] - self.lastRollAngle[-1]
         
 
         timeDifference = .5     #hypothetically - see main
         omega_n = delta/timeDifference
-        self.omega.append()
+        self.omega.append(omega_n)
         alpha_n = self.omega[-1]/timeDifference
         self.alpha.append(alpha_n)
         #-- Logging ----------------
-        print("omega:" + omega_n)
-        print("alpha:" + alpha_n)
+        self.ballast_algorithnm_debug_publisher_.publish("omega: " + str(omega_n) + " -- " + "alpha / acceleration: " + str(alpha_n) + "\n")
+        #Account for a heavy tilt
+        
          #-----------
          # Starboard tack
         if 0 < smooth_angle <= 180: 
             # Go for 20 degrees
-            if float(self.airmar_data["roll"]) > -12:
+            if float(self.airmar_data["roll"]) > -12:           #change to roll acc.
                 ballast_angle = 110
-            elif float(self.airmar_data["roll"]) < -20:
+            elif float(self.airmar_data["roll"]) < -20:         #change to roll acc.
                 ballast_angle = 80
                 #-----------
         # Port tack
@@ -171,8 +175,8 @@ def main(args=None):
         # control_system.trim_tab_status
 
         # Need to publish new values to both control topics based on new values
-        # control_system.pwm_control_publisher_.publish()
-        # control_system.trim_tab_control_publisher_.publish()
+        # control_system.pwm_control_publisher_.publish()       <----- i think both of these are notes from last year and have since been implemented
+        # control_system.trim_tab_control_publisher_.publish()  <----- i think both of these are notes from last year and have since been implemented
 
         #TODO ^^implement
         

@@ -92,6 +92,12 @@ class DebugInterface(Node):
         self.get_logger().info('PWM msg: "%s"' % msg.data)
         requests.post(url, data=msg.data, headers=Headers)
 
+    #JARIUS TBD - Add callbacks for {battery voltage, BT status, intended heading, current mag. heading from Airmar}
+        #pull Trim Tab Battery - display as a percent
+        #maybe convert Hull Battery Voltage to an expression (ie. GOOD, OKAY, LOW, DYING, DEAD, EMERGENCY)
+    #def topic_name_listener_callback(self, msg):
+        #self.get_logger().info('xxxxx msg: "%s"' % msg.data)
+        #requests.post(url, data=msg.data, headers=Headers)
 
 def main(args=None):
     rclpy.init(args=args)
