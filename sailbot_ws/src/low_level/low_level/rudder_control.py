@@ -1,4 +1,4 @@
-import rclpy
+mport rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 from std_msgs.msg import Int64
@@ -47,15 +47,20 @@ class RudderController(Node):
 
     def new_heading_callback(self):
         direction_diff = self.d_heading - self.current_heading  # positive = want to turn to starboard
-        # if direction_diff > 10:
-        #     desired_rudder_angle = RudderController.max_turn_starboard
-        # elif direction_diff < -10:
-        #     desired_rudder_angle = RudderController.max_turn_port
-        # else:
-        #     desired_rudder_angle = RudderController.middle_pos
+        self.get_logger().info('Direction Diff: {}'.format(direction_diff))
 
         # calc change in rudder pos with fuzzy logic
         desired_percent_change = RudderController.fuzzy_logic(direction_diff, self.rate_of_turn)
+
+        # threshold for change so we can stay straight
+        if 1.0 >= desired_percent_change >= -1.0:
+            rudder_json = {"channel": "8", "angle": RudderController.middle_pos}  # publish middle pos
+            self.current_rudder_pos = RudderController.middle_pos
+            rudder_string = self.make_json_string(rudder_json)
+            self.publisher_.publish(rudder_string)
+            self.get_logger().info('Publishing: "%s"' % rudder_string)
+            return  # don't do the rest of function
+
         self.get_logger().info('Desired Percent Change: {}'.format(desired_percent_change))
         desired_decimal_change = desired_percent_change / 100.0
 
@@ -68,6 +73,7 @@ class RudderController(Node):
 
         # publish new rudder pos
         rudder_json = {"channel": "8", "angle": new_rudder_pos}
+        self.current_rudder_pos = new_rudder_pos
         rudder_string = self.make_json_string(rudder_json)
         self.publisher_.publish(rudder_string)
         self.get_logger().info('Publishing: "%s"' % rudder_string)
