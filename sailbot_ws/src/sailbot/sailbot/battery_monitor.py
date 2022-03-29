@@ -19,7 +19,7 @@ class BatteryMonitor(Node):
         # Pin Setup:
         # Board pin-numbering scheme
         GPIO.setmode(GPIO.BCM)  # Set pins low for high inputs
-        GPIO.setup(self.bat_p1, GPIO.IN)	# + 14V
+        GPIO.setup(self.bat_p1, GPIO.IN)  # + 14V
         GPIO.setup(self.bat_p2, GPIO.IN)  # + 13V
         GPIO.setup(self.bat_p3, GPIO.IN)  # + 12V
         GPIO.setup(self.bat_p4, GPIO.IN)  # + 11V
@@ -27,15 +27,15 @@ class BatteryMonitor(Node):
     def timer_callback(self):
         msg = String()
         # #If Else Statements
-        if self.bat_p1 == 1:
+        if GPIO.input(self.bat_p1):
             msg.data = "+14V you're balling"
-        elif self.bat_p2 == 1:
+        elif GPIO.input(self.bat_p2):
             msg.data = "+13V you're still keefin' Chief"
-        elif self.bat_p3 == 1:
+        elif GPIO.input(self.bat_p3):
             msg.data = "+12V recommend turn back to charge"
-        elif self.bat_p4 == 1:
+        elif GPIO.input(self.bat_p4):
             msg.data = "+11V Turn back Battery in danger"
-        elif self.bat_p1 == 0 and self.bat_p2 == 0 and self.bat_p3 == 0 and self.bat_p4 == 0:
+        elif GPIO.input(self.bat_p1) is False and GPIO.input(self.bat_p2) is False and GPIO.input(self.bat_p3) is False and GPIO.input(self.bat_p4) is False:
             msg.data = "You done fucked up this time"
         else:
             msg.data = "Uh oh a fucky wucky happened"
@@ -55,6 +55,7 @@ def main(args=None):
     # (optional - otherwise it will be done automatically
     # when the garbage collector destroys the node object)
     bat_monitor.destroy_node()
+    GPIO.cleanup()
     rclpy.shutdown()
 
 
