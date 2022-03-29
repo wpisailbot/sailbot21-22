@@ -11,10 +11,10 @@ class BatteryMonitor(Node):
         timer_period = 5  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         # Pin Definitions Need 5 board pins next to one another
-        self.bat_p1 = 37  # 14V pin
-        self.bat_p2 = 33  # 13V pin
-        self.bat_p3 = 31  # 12V pin
-        self.bat_p4 = 29  # 11V pin
+        self.bat_p1 = 26  # 14V pin
+        self.bat_p2 = 13  # 13V pin
+        self.bat_p3 = 6  # 12V pin
+        self.bat_p4 = 5  # 11V pin
 
         # Pin Setup:
         # Board pin-numbering scheme
