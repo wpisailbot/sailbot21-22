@@ -19,10 +19,10 @@ class BatteryMonitor(Node):
         # Pin Setup:
         # Board pin-numbering scheme
         GPIO.setmode(GPIO.BCM)  # Set pins low for high inputs
-        GPIO.setup(self.bat_p1, GPIO.IN, initial=GPIO.LOW)	# + 14V
-        GPIO.setup(self.bat_p2, GPIO.IN, initial=GPIO.LOW)  # + 13V
-        GPIO.setup(self.bat_p3, GPIO.IN, initial=GPIO.LOW)  # + 12V
-        GPIO.setup(self.bat_p4, GPIO.IN, initial=GPIO.LOW)  # + 11V
+        GPIO.setup(self.bat_p1, GPIO.IN)	# + 14V
+        GPIO.setup(self.bat_p2, GPIO.IN)  # + 13V
+        GPIO.setup(self.bat_p3, GPIO.IN)  # + 12V
+        GPIO.setup(self.bat_p4, GPIO.IN)  # + 11V
 
     def timer_callback(self):
         msg = String()
@@ -42,7 +42,6 @@ class BatteryMonitor(Node):
 
         self.publisher_.publish(msg)
         self.get_logger().info('Publishing: "%s"' % msg.data)
-        self.i += 1
 
 
 def main(args=None):
