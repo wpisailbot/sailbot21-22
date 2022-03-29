@@ -52,6 +52,12 @@ class RudderController(Node):
         # calc change in rudder pos with fuzzy logic
         desired_percent_change = RudderController.fuzzy_logic(direction_diff, self.rate_of_turn)
 
+        self.get_logger().info('Desired Percent Change: {}'.format(desired_percent_change))
+        desired_decimal_change = desired_percent_change / 100.0
+
+        # this is the split between continuous mode and discontinuous mode
+        new_rudder_pos = self.current_rudder_pos - (90.0 * desired_decimal_change)  # total range of motion is 90 deg
+
         # threshold for change so we can stay straight
         if 1.0 >= desired_percent_change >= -1.0:
             rudder_json = {"channel": "8", "angle": RudderController.middle_pos}  # publish middle pos
@@ -61,10 +67,6 @@ class RudderController(Node):
             self.get_logger().info('Publishing: "%s"' % rudder_string)
             return  # don't do the rest of function
 
-        self.get_logger().info('Desired Percent Change: {}'.format(desired_percent_change))
-        desired_decimal_change = desired_percent_change / 100.0
-
-        new_rudder_pos = self.current_rudder_pos - (90.0 * desired_decimal_change)  # total range of motion is 90 deg
         # make sure not to overshoot boundaries
         if new_rudder_pos > RudderController.max_turn_port:
             new_rudder_pos = RudderController.max_turn_port
