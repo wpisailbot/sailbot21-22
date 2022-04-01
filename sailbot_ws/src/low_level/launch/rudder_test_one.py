@@ -22,11 +22,4 @@ def generate_launch_description():
             node_executable='rudder_control_discontinuous',
             name='rudder_control'
         ),
-        Node(
-            package='low_level',
-            node_executable='desired_heading',
-            name='d_heading',
-            prefix='gnome-terminal --command',
-            output='screen'
-        ),
     ])
