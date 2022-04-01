@@ -8,9 +8,14 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='low_level',
-            node_executable='rudder_control_discontinuous',
-            name='rudder_control'
+            package='sailbot',
+            node_executable='airmar_reader',
+            name='airmar'
+        ),
+        Node(
+            package='sailbot',
+            node_executable='pwm_controller',
+            name='pwm'
         ),
         Node(
             package='low_level',
@@ -19,13 +24,8 @@ def generate_launch_description():
             output='screen'
         ),
         Node(
-            package='sailbot',
-            node_executable='pwm_controller',
-            name='pwm'
+            package='low_level',
+            node_executable='rudder_control_discontinuous',
+            name='rudder_control'
         ),
-        Node(
-            package='sailbot',
-            node_executable='airmar_reader',
-            name='airmar'
-        )
     ])
