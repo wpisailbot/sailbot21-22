@@ -11,14 +11,19 @@ class DesiredHeading(Node):
         super().__init__('Desired_Heading')
         self.publisher = self.create_publisher(Int64, 'd_heading', 10)
         self.subscription = self.create_subscription(String, 'airmar_data', self.listener_callback, 15)
-        timer_period = 1  # seconds
+        timer_period = 2  # seconds
+        instant_refresh = 1
         self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.input_timer = self.create_time(instant_refresh, self.input_callback)
 
         self.current_heading = 0
 
     def timer_callback(self):
-        msg = Int64()
+        # just print the current heading every few seconds
         print("Current Heading: ", self.current_heading)
+
+    def input_callback(self):
+        msg = Int64()
         d_heading = input("Desired Heading: ")
         msg.data = int(d_heading)
         self.publisher.publish(msg)
