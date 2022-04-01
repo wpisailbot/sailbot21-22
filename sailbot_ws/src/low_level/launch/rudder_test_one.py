@@ -19,13 +19,14 @@ def generate_launch_description():
         ),
         Node(
             package='low_level',
-            node_executable='desired_heading_publisher',
-            name='d_heading',
-            output='screen'
+            node_executable='rudder_control_discontinuous',
+            name='rudder_control'
         ),
         Node(
             package='low_level',
-            node_executable='rudder_control_discontinuous',
-            name='rudder_control'
+            node_executable='desired_heading',
+            name='d_heading',
+            prefix='gnome-terminal --command',
+            output='screen'
         ),
     ])
