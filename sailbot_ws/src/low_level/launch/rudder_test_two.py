@@ -9,13 +9,14 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='low_level',
-            node_executable='rudder_control_discontinuous',
+            node_executable='rudder_control_continuous',
             name='rudder_control'
         ),
         Node(
             package='low_level',
             node_executable='desired_heading_publisher',
-            name='d_heading'
+            name='d_heading',
+            outout='screen'
         ),
         Node(
             package='sailbot',

@@ -15,7 +15,8 @@ def generate_launch_description():
         Node(
             package='low_level',
             node_executable='desired_heading_publisher',
-            name='d_heading'
+            name='d_heading',
+            output='screen'
         ),
         Node(
             package='sailbot',
