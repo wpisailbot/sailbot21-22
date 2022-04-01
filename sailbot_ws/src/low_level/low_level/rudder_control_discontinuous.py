@@ -59,7 +59,7 @@ class RudderController(Node):
         new_rudder_pos = self.current_rudder_pos - (90.0 * desired_decimal_change)  # total range of motion is 90 deg
 
         # threshold for change so we can stay straight, if there's almost no change need, just go straight
-        if 1.0 >= desired_percent_change >= -1.0:
+        if 1.5 >= direction_diff >= -1.5:
             rudder_json = {"channel": "8", "angle": RudderController.middle_pos}  # publish middle pos
             self.current_rudder_pos = RudderController.middle_pos
             rudder_string = self.make_json_string(rudder_json)
