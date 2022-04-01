@@ -14,7 +14,7 @@ class DesiredHeading(Node):
         timer_period = 2  # seconds
         instant_refresh = 1
         self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.input_timer = self.create_time(instant_refresh, self.input_callback)
+        self.input_timer = self.create_timer(instant_refresh, self.input_callback)
 
         self.current_heading = 0
 

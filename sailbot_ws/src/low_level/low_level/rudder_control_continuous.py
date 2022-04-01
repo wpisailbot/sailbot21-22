@@ -11,8 +11,8 @@ from skfuzzy import control as ctrl
 class RudderController(Node):
     # the rudder position extremes:
     middle_pos = 70
-    max_turn_port = 115
-    max_turn_starboard = 25
+    max_turn_port = 110
+    max_turn_starboard = 30
 
     def __init__(self):
         super().__init__('Rudder_Controller')
