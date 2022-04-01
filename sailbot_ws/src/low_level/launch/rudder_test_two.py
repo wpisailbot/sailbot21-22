@@ -9,18 +9,17 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='sailbot',
-            node_executable='pwm_controller',
-            name='pwm'
+            node_executable='airmar_reader',
+            name='airmar'
         ),
         Node(
             package='sailbot',
-            node_executable='airmar_reader',
-            name='airmar'
+            node_executable='pwm_controller',
+            name='pwm'
         ),
         Node(
             package='low_level',
             node_executable='rudder_control_continuous',
             name='rudder_control',
-            output='screen'
         ),
     ])
