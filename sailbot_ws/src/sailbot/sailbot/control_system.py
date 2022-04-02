@@ -94,21 +94,25 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
 
     def find_trim_tab_state(self, relative_wind):           #five states of trim
         smooth_angle = self.update_winds(relative_wind)
+        msg = Int8()
         if 45.0 <= smooth_angle < 135:
             # Max lift port
-            self.trim_tab_control_publisher_.publish(0)
+            msg.data = (0)
         elif 135 <= smooth_angle < 180:
             # Max drag port
-            self.trim_tab_control_publisher_.publish(2)
+            msg.data = (2)
         elif 180 <= smooth_angle < 225:
             # Max drag starboard
-            self.trim_tab_control_publisher_.publish(3)
+            msg.data = (3)
         elif 225 <= smooth_angle < 315:
             # Max lift starboard
-            self.trim_tab_control_publisher_.publish(1)
+            msg.data = (1)
         else:
             # In irons, min lift
-            self.trim_tab_control_publisher_.publish(4)
+            msg.data = (4)
+
+        
+        self.trim_tab_control_publisher_.publish(msg)
             
     def make_json_string(self, json_msg):
         json_str = json.dumps(json_msg)
@@ -186,7 +190,9 @@ def main(args=None):
             if float(control_system.serial_rc["state1"]) < 400:
                 # Manual - not currently implemented
                 # manual_angle = int((float(control_system.serial_rc["manual"]) / 2000) * 100) + 65
-                control_system.trim_tab_control_publisher_.publish(5)
+                msg = Int8()
+                msg.data = 5
+                control_system.trim_tab_control_publisher_.publish(msg)
             elif "wind-angle-relative" in control_system.airmar_data:
                 # print(control_system.airmar_data["wind-angle-relative"])
                 try:
