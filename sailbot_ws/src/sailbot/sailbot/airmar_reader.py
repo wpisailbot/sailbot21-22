@@ -53,7 +53,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                         "Longitude":lon,
                         "Longitude-direction":args[4]}
             elif(type_code == 'VTG'):
-                return {"track-degrees-true":args[1],
+                return {"currentHeading":args[1],
                         "track-degrees-magnetic":args[3],
                         "speed-knots":args[5],
                         "speed-kmh":args[7]}
@@ -72,7 +72,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 return ret
 
             elif(type_code == 'HDG'):
-                return {"magnetic-sensor-heading":args[1], #degrees
+                return {"magneticSensorHeading":args[1], #degrees   -- magnetic sensot heading
                         "magnetic-deviation":args[2], #degrees
                         "magnetic-deviation-direction":args[3],
                         "magnetic-variation":args[4], #degrees
@@ -90,13 +90,22 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 return {} #not sure if needed
             elif(type_code == 'GRS'): #"The GRS message is used to support the Receiver Autonomous Integrity Monitoring (RAIM)." -- unneeded
                 return {}
-            elif(type_code == 'MWD'): 
-                return {"wind-angle-true":args[1], # in degrees
-                        "wind-speed-true-knots":args[5],
-                        "wind-speed-true-meters":args[7]} #in m/s
-            elif(type_code == 'MWV'):
-                return {"wind-angle-relative":args[1], # in degrees
-                        "wind-speed-relative-meters":args[3]} #in m/s
+            elif(type_code == 'MWD'): #True Wind
+                return {"trueWind":
+                    {"speed": args[5],      #in knots
+                     #"speed": args[7]      for reporting in m/s
+                    "direction": args[1],   #in deg
+                    }
+                }
+                        
+            elif(type_code == 'MWV'):       #apparent wind
+                return {"trueWind":
+                    {"speed": args[3],      #in knots
+                    "direction": args[1],   #in deg
+                    }
+                }
+            #1 and 3 for {direction, m/s} in MWV
+            #1 and 5 and 7 for {direction, knots, m/s} in MWD
             elif(type_code == 'ZDA'): #date & time
                 return {} # unneeded
             elif(type_code == 'IMU'): #based on this website (https://docs.inertialsense.com/user-manual/com-protocol/ascii/#pimu IMU could be an ASCII message sent over bus), 
@@ -104,8 +113,10 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
             
             elif(type_code == 'OUT'): #real key is 'PMAROUT', shortened to OUT, since all others are 3 letters
                 #"PGN is translated to a Maretron proprietary NMEA 0183 sentence " -- used for pitch and roll
-                return {"roll":args[2],
+                return { "pitchroll":
+                        {"roll":args[2],
                         "pitch":args[3]}
+                }
             else:
                 raise ValueError("Unknown NMEA code: " + type_code)
         except Exception as e:
