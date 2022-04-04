@@ -19,20 +19,27 @@ class RudderController(Node):
         self.publisher_ = self.create_publisher(String, 'pwm_control', 10)
         self.airmar_subscription = self.create_subscription(String, 'airmar_data', self.airmar_callback, 15)
         self.d_heading_subscription = self.create_subscription(Int64, 'd_heading', self.d_heading_callback, 15)
-        # timer_period = 1  # seconds
-        # self.timer = self.create_timer(timer_period, self.timer_callback)
         self.current_heading = 0
         self.d_heading = 0
         self.rate_of_turn = 0
         self.current_rudder_pos = 70  # default to center
 
     def make_json_string(self, json_msg):
+        """
+        Used to convert rudder position to json string
+        :param json_msg: dict to convert
+        :return: ROS String message to be published
+        """
         json_str = json.dumps(json_msg)
         message = String()
         message.data = json_str
         return message
 
     def airmar_callback(self, msg):
+        """
+        On airmar reading, set internal variables, then if its a new heading message, run the new heading callback
+        :param msg: message from airmar_reader node
+        """
         msg_dict = json.loads(msg.data)
         if "magnetic-sensor-heading" in msg_dict:
             self.current_heading = float(msg_dict["magnetic-sensor-heading"])
@@ -41,31 +48,32 @@ class RudderController(Node):
             self.rate_of_turn = float(msg_dict["rate-of-turn"])
 
     def d_heading_callback(self, msg):
+        """
+        On new desired heading, set internal variables
+        :param msg: desired heading message
+        """
         self.d_heading = msg.data
         print("Desired Heading: ", self.d_heading)
         print("Current Heading: ", self.current_heading)
 
     def new_heading_callback(self):
+        """
+        Main rudder control function. Use fuzzy logic to calculate new rudder position and publish that
+        """
         direction_diff = self.d_heading - self.current_heading  # positive = want to turn to starboard
         self.get_logger().info('Direction Diff: {}'.format(direction_diff))
 
         # calc change in rudder pos with fuzzy logic
         desired_percent_change = RudderController.fuzzy_logic(direction_diff, self.rate_of_turn)
-
         self.get_logger().info('Desired Percent Change: {}'.format(desired_percent_change))
-        desired_decimal_change = desired_percent_change / 100.0
 
-        # this is the split between continuous mode and discontinuous mode
-        new_rudder_pos = self.current_rudder_pos - (90.0 * desired_decimal_change)  # total range of motion is 90 deg
+        # calc new rudder position, current position - calculated change
+        # subtract change because lower position = more to starboard
+        new_rudder_pos = self.current_rudder_pos - (90.0 * (desired_percent_change / 100.0))
 
-        # threshold for change so we can stay straight, if there's almost no change need, just go straight
+        # threshold to stay straight, if there's almost no change need, just go straight
         if 1.5 >= direction_diff >= -1.5:
-            rudder_json = {"channel": "8", "angle": RudderController.middle_pos}  # publish middle pos
-            self.current_rudder_pos = RudderController.middle_pos
-            rudder_string = self.make_json_string(rudder_json)
-            self.publisher_.publish(rudder_string)
-            self.get_logger().info('Publishing: "%s"' % rudder_string)
-            return  # don't do the rest of function
+            new_rudder_pos = RudderController.middle_pos
 
         # make sure not to overshoot boundaries
         if new_rudder_pos > RudderController.max_turn_port:
@@ -89,7 +97,7 @@ class RudderController(Node):
 
         :param desired_heading_diff: desired heading - current heading, positive means we want to turn to starboard
         :param rate_of_turn: taken from airmar, positive means currently turning to port
-        :return:
+        :return: outcome of fuzzy logic calculation, desired % change in rudder position
         """
         # create membership function for desired direction
         desired_direction = ctrl.Antecedent(np.arange(-180, 180, 1), "desired direction")
