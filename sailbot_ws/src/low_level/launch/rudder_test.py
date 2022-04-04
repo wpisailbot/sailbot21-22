@@ -19,7 +19,7 @@ def generate_launch_description():
         ),
         Node(
             package='low_level',
-            node_executable='rudder_control_continuous',
-            name='rudder_control',
+            node_executable='rudder_control',
+            name='rudder_control'
         ),
     ])

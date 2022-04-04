@@ -24,8 +24,7 @@ setup(
         'console_scripts': [
             'rudder_test = low_level.rudder_test:main',
             'desired_heading = low_level.desired_heading_publisher:main',
-            'rudder_control_discontinuous = low_level.rudder_control_discontinuous:main',
-            'rudder_control_continuous = low_level.rudder_control_continuous:main',
+            'rudder_control_discontinuous = low_level.rudder_control:main',
         ],
     },
 )
