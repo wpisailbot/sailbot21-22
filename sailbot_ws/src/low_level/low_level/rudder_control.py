@@ -60,7 +60,16 @@ class RudderController(Node):
         """
         Main rudder control function. Use fuzzy logic to calculate new rudder position and publish that
         """
-        direction_diff = self.d_heading - self.current_heading  # positive = want to turn to starboard
+
+        # calculate difference in direction, positive difference = want to turn to starboard
+        direction_diff = self.d_heading - self.current_heading
+
+        # heading is only between 0 and 360 so we have to take that into account
+        if direction_diff > 180:
+            direction_diff = direction_diff - 360
+        elif direction_diff < -180:
+            direction_diff = direction_diff + 360
+
         self.get_logger().info('Direction Diff: {}'.format(direction_diff))
 
         # calc change in rudder pos with fuzzy logic
