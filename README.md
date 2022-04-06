@@ -19,11 +19,13 @@ Nodes:
 - control_system
 - trim_tab_comms
 - debug_interface
+- battery_monitor
 
 Topics:
 - serial_rc
 - pwm_control
 - airmar_data
+- battery_status
 - tt_control
 - tt_telemetry
 - tt_battery
@@ -43,6 +45,8 @@ Node Subscriptions and Publishing:
   - subscribes to `tt_control`
 - debug_interface
   - subscribes to `serial_rc`, `pwm_control`, `airmar_data`, `tt_control`, `tt_telemetry`, `tt_battery`
+- battery_monitor
+  - publishes to `battery_status`
 
 ### ROS Architecture Summary
 
@@ -62,6 +66,7 @@ The trim tab comms node connects to the trim tab controller, over a Bluetooth Lo
 
 The debug interface runs with the telemetry in order to gather data and show the current status of the boat.
 
+The battery monitor node reads from the battery monitor and publishes the approximate voltage
 
 ## ROS Dependencies
 

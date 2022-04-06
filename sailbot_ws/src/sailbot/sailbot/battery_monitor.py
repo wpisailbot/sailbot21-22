@@ -1,14 +1,15 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String
+from std_msgs.msg import Int64
 import RPi.GPIO as GPIO
+
 
 class BatteryMonitor(Node):
 
     def __init__(self):
         super().__init__('battery_monitor')
-        self.publisher_ = self.create_publisher(String, 'battery_status', 10)
-        timer_period = 5  # seconds
+        self.publisher_ = self.create_publisher(Int64, 'battery_status', 10)
+        timer_period = 300  # 5 min
         self.timer = self.create_timer(timer_period, self.timer_callback)
         # Pin Definitions Need 5 board pins next to one another
         self.bat_p1 = 26  # 14V pin
@@ -25,23 +26,29 @@ class BatteryMonitor(Node):
         GPIO.setup(self.bat_p4, GPIO.IN)  # + 11V
 
     def timer_callback(self):
-        msg = String()
+        msg = Int64()
         # #If Else Statements
         if GPIO.input(self.bat_p1):
-            msg.data = "+14V you're balling"
+            msg.data = 14
+            log_string = "+14V you're balling"
         elif GPIO.input(self.bat_p2):
-            msg.data = "+13V you're still keefin' Chief"
+            msg.data = 13
+            log_string = "+13V you're still keefin' Chief"
         elif GPIO.input(self.bat_p3):
-            msg.data = "+12V recommend turn back to charge"
+            msg.data = 12
+            log_string = "+12V Turn back now"
         elif GPIO.input(self.bat_p4):
-            msg.data = "+11V Turn back Battery in danger"
+            msg.data = 11
+            log_string = "+11V Battery in danger"
         elif GPIO.input(self.bat_p1) is False and GPIO.input(self.bat_p2) is False and GPIO.input(self.bat_p3) is False and GPIO.input(self.bat_p4) is False:
-            msg.data = "You done fucked up this time"
+            msg.data = 0
+            log_string = "You done fucked up this time"
         else:
-            msg.data = "Uh oh a fucky wucky happened"
+            msg.data = -1
+            log_string = "Uh oh a fucky wucky happened"
 
         self.publisher_.publish(msg)
-        self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.get_logger().info(log_string)
 
 
 def main(args=None):
