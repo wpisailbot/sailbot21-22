@@ -150,7 +150,8 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         if 0 < smooth_angle <= 180: 
             # Go for 20 degrees
             if float(self.airmar_data["roll"]) > -12:           #change to roll acc.
-                ballast_angle = 110
+                #ballast_angle = 110
+                ballast_angle = omega_n * 2
             elif float(self.airmar_data["roll"]) < -20:         #change to roll acc.
                 ballast_angle = 80
                 #-----------
@@ -193,10 +194,10 @@ def main(args=None):
                 msg = Int8()
                 msg.data = 5
                 control_system.trim_tab_control_publisher_.publish(msg)
-            elif "wind-angle-relative" in control_system.airmar_data:
+            elif "apparentWind" in control_system.airmar_data:
                 # print(control_system.airmar_data["wind-angle-relative"])
                 try:
-                    control_system.find_trim_tab_state(control_system.airmar_data["wind-angle-relative"])
+                    control_system.find_trim_tab_state(control_system.airmar_data["apparentWind"]["direction"])
                 except Exception as e:
                     control_system.get_logger().error(str(e))
             else:
@@ -220,7 +221,7 @@ def main(args=None):
                 try:
                     if control_system.p2p_alg is None:  # Instantiate new
                         control_system.p2p_alg = p2p.P2P((float(control_system.airmar_data['Latitude']), float(control_system.airmar_data['Longitude'])), destinations[0])
-                    wind = control_system.update_winds(control_system.airmar_data["wind-angle-relative"])
+                    wind = control_system.update_winds(control_system.airmar_data["apparentWind"]["direction"])
                     action = control_system.p2p_alg.getAction(wind, float(control_system.airmar_data["magnetic-sensor-heading"]), float(control_system.airmar_data["track-degrees-true"]))
                     control_system.get_logger().error(str(control_system.p2p_alg.getdistance()))
                     control_system.get_logger().error(str(action))

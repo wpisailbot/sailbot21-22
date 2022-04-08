@@ -53,7 +53,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                         "Longitude":lon,
                         "Longitude-direction":args[4]}
             elif(type_code == 'VTG'):
-                return {"currentHeading":args[1],
+                return {"track-degrees-true":args[1],
                         "track-degrees-magnetic":args[3],
                         "speed-knots":args[5],
                         "speed-kmh":args[7]}
@@ -72,7 +72,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 return ret
 
             elif(type_code == 'HDG'):
-                return {"magneticSensorHeading":args[1], #degrees   -- magnetic sensot heading
+                return {"currentHeading":args[1], #degrees   -- magnetic sensot heading
                         "magnetic-deviation":args[2], #degrees
                         "magnetic-deviation-direction":args[3],
                         "magnetic-variation":args[4], #degrees
@@ -99,7 +99,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 }
                         
             elif(type_code == 'MWV'):       #apparent wind
-                return {"trueWind":
+                return {"apparentWind":
                     {"speed": args[3],      #in knots
                     "direction": args[1],   #in deg
                     }
