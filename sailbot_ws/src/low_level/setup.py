@@ -24,7 +24,9 @@ setup(
         'console_scripts': [
             'rudder_test = low_level.rudder_test:main',
             'desired_heading = low_level.desired_heading_publisher:main',
-            'rudder_control_discontinuous = low_level.rudder_control:main',
+            'rudder_control = low_level.rudder_control:main',
+            'point2point = low_level.point_to_point:main',
+            'target_location = low_level.lat_long_publisher:main'
         ],
     },
 )
