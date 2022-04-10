@@ -149,7 +149,7 @@ class HeadingPublisher(Node):
         """
         putting it all together, gets the optimal heading and publishes it
         """
-        msg = Int64
+        msg = Int64()
         target_angle = self.calc_target_angle()
         headings = self.calculate_heading_velocities()
         best_heading = self.calc_best_heading(target_angle, headings)
