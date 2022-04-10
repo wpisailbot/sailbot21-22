@@ -47,8 +47,8 @@ class HeadingPublisher(Node):
         if "Latitude" in msg_dict:
             self.current_pos.x = float(msg_dict["Latitude"])
             self.current_pos.y = float(msg_dict["Longitude"])
-        elif "wind-angle-relative" in msg_dict:
-            self.wind_angle = float(msg_dict["wind-angle-relative"])
+        elif "wind-angle-true" in msg_dict:
+            self.wind_angle = float(msg_dict["wind-angle-true"])
 
     def calc_target_angle(self):
         """
