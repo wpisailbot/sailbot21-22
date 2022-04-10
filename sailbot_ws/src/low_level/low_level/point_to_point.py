@@ -21,8 +21,10 @@ class HeadingPublisher(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
         # internal variables
         self.wind_angle = 0.0
-        self.target_pos = Point(0, 0, 0)  # x = Latitude, y = Longitude
-        self.current_pos = Point(0, 0, 0)  # ditto
+        self.target_pos = Point()  # x = Latitude, y = Longitude
+        self.target_pos.x, self.target_pos.y = 0.0, 0.0
+        self.current_pos = Point()  # ditto
+        self.current_pos.x, self.current_pos.y = 0.0, 0.0
         self.num_headings = 20  # how many possible headings to calculate, more = more precise but takes longer to calc
         self.beating_factor = 1  # used to prevent tacking back and forth upwind, higher = less likely to tack
         self.current_target_heading = 0
@@ -151,7 +153,7 @@ class HeadingPublisher(Node):
         target_angle = self.calc_target_angle()
         headings = self.calculate_heading_velocities()
         best_heading = self.calc_best_heading(target_angle, headings)
-        msg.data = best_heading
+        msg.data = int(best_heading)
         self.publisher_.publish(msg)
 
 
