@@ -21,8 +21,8 @@ class HeadingPublisher(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
         # internal variables
         self.wind_angle = 0.0
-        self.target_pos = Point()  # x = Latitude, y = Longitude
-        self.current_pos = Point()  # ditto
+        self.target_pos = Point(0, 0, 0)  # x = Latitude, y = Longitude
+        self.current_pos = Point(0, 0, 0)  # ditto
         self.num_headings = 20  # how many possible headings to calculate, more = more precise but takes longer to calc
         self.beating_factor = 1  # used to prevent tacking back and forth upwind, higher = less likely to tack
         self.current_target_heading = 0
@@ -34,6 +34,7 @@ class HeadingPublisher(Node):
         :param msg: message from target generation node
         """
         self.target_pos = msg
+        self.get_logger().info(msg)
 
     def airmar_callback(self, msg):
         """
@@ -143,6 +144,9 @@ class HeadingPublisher(Node):
             return best_heading
 
     def timer_callback(self):
+        """
+        putting it all together, gets the optimal heading and publishes it
+        """
         msg = Int64
         target_angle = self.calc_target_angle()
         headings = self.calculate_heading_velocities()
