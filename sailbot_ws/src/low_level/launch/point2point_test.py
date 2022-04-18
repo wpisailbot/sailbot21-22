@@ -19,6 +19,11 @@ def generate_launch_description():
         ),
         Node(
             package='low_level',
+            node_executable='tt_state_pub',
+            name='tt_state_pub'
+        ),
+        Node(
+            package='low_level',
             node_executable='rudder_control',
             name='rudder_control'
         ),
