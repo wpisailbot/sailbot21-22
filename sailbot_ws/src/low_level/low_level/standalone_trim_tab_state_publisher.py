@@ -32,10 +32,6 @@ class TrimTabStatePub(Node):
         return (sum(s[n//2-1:n//2+1])/2.0, s[n//2])[n % 2] if n else None
 
     def update_winds(self, relative_wind):
-        # Check we have new wind
-        if len(self.lastWinds) != 0 and relative_wind == self.lastWinds[len(self.lastWinds) -1]:
-            self.get_logger().info("retrun 0")
-            return 0
         # First add wind to running list
         self.lastWinds.append(float(relative_wind))
         if len(self.lastWinds) > 10:

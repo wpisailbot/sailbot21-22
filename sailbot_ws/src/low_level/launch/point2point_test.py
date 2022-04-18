@@ -18,6 +18,11 @@ def generate_launch_description():
             name='pwm'
         ),
         Node(
+            package='sailbot',
+            node_executable='trim_tab_comms',
+            name='trim_tab_comms'
+        ),
+        Node(
             package='low_level',
             node_executable='tt_state_pub',
             name='tt_state_pub'
