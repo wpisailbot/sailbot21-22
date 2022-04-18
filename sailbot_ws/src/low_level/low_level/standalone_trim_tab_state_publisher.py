@@ -45,7 +45,7 @@ class TrimTabStatePub(Node):
         self.get_logger().info(smooth_angle)
         if 45.0 <= smooth_angle < 135:
             # Max lift port
-            self.best_state = 0
+            self.best_state = 3
         elif 135 <= smooth_angle < 180:
             # Max drag port
             self.best_state = 2
@@ -54,7 +54,7 @@ class TrimTabStatePub(Node):
             self.best_state = 3
         elif 225 <= smooth_angle < 315:
             # Max lift starboard
-            self.best_state = 1
+            self.best_state = 2
         else:
             # In irons, min lift
             self.best_state = 4
