@@ -18,7 +18,6 @@ class TrimTabStatePub(Node):
     def listener_callback(self, msg):
         msg_dict = json.loads(msg.data)
         if "wind-angle-relative" in msg_dict:
-            self.get_logger().info("new wind angle")
             self.find_trim_tab_state(float(msg_dict["wind-angle-relative"]))
 
     def timer_callback(self):
@@ -42,7 +41,7 @@ class TrimTabStatePub(Node):
 
     def find_trim_tab_state(self, relative_wind):
         smooth_angle = self.update_winds(relative_wind)
-        self.get_logger().info(smooth_angle)
+        self.get_logger().info(str(smooth_angle))
         if 45.0 <= smooth_angle < 135:
             # Max lift port
             self.best_state = 3
