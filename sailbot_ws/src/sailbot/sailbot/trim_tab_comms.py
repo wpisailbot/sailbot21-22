@@ -7,7 +7,7 @@ import rclpy
 from rclpy.node import Node
 from enum import Enum
 
-from std_msgs.msg import Int8, Float32
+from std_msgs.msg import Int8, Int16, Float32
 
 
 ble_address = "F0:08:D1:CE:D8:52"  # Trim Tab controller BLE address
@@ -50,7 +50,8 @@ class TrimTabComms(Node):
 
         self.tt_telemetry_publisher = self.create_publisher(Float32, 'tt_telemetry', 10)  # Wind direction
         self.tt_battery_publisher = self.create_publisher(Int8, 'tt_battery', 10)  # Battery level
-        self.tt_control_subscriber = self.create_subscription(Int8, 'tt_control', self.listener_callback, 10)  # Trim tab state (currently does not support manual angle)
+        self.tt_control_subscriber = self.create_subscription(Int8, 'tt_control', self.listener_callback, 10)  # Trim tab state
+        self.tt_angle_subscriber = self.create_subscription(Int16, 'tt_angle', self.angle_callback, 10)
 
         # Set up timer for retrieving variables over BLE
         timer_period = 0.5  # Fetch data every 0.5 seconds
@@ -157,6 +158,17 @@ class TrimTabComms(Node):
         loop = asyncio.get_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self.ble_write())
+    
+    def angle_callback(self, msg):
+    	""" Subscription handler for trim tab angle updates (Manual mode) """
+    	self.get_logger().debug("Updating manual trim tab angle")
+    	global angle
+    	angle = msg.data
+    	
+    	# Send new angle to trim tab controller
+    	loop = asyncio.get_event_loop()
+    	asyncio.set_event_loop(loop)
+    	loop.run_until_complete(self.ble_write())
 
 
 def main(args=None):
