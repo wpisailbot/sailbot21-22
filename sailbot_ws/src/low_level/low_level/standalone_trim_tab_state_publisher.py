@@ -10,7 +10,7 @@ class TrimTabStatePub(Node):
         super().__init__('TrimTabStatePub')
         self.trim_tab_control_publisher_ = self.create_publisher(Int8, 'tt_control', 10)
         self.subscription = self.create_subscription(String, 'airmar_data', self.listener_callback, 15)
-        timer = 3  # seconds between publish
+        timer = 30  # seconds between publish
         self.input_timer = self.create_timer(timer, self.timer_callback)
         self.lastWinds = []
         self.best_state = 4  # default to min lift
