@@ -67,12 +67,12 @@ class TrimTabComms(Node):
 
     def lost_connection(self, client):
         """ Attempt to reconnect if connection is lost unexpectedly """
-	if self.expect_disconnect:
-	    return None
-		
-	self.get_logger().info("Lost connection: Attempting to reconnect...")
-	loop = asyncio.get_event_loop()
-	loop.create_task(self._ble_connect())
+        if self.expect_disconnect:
+            return None
+
+        self.get_logger().info("Lost connection: Attempting to reconnect...")
+        loop = asyncio.get_event_loop()
+        loop.create_task(self._ble_connect())
 
     def disconnect(self):
         """ Disconnect from the trim tab controller """
@@ -86,16 +86,16 @@ class TrimTabComms(Node):
         attempts = 0
         connected = False
         while not connected and attempts < 5:
-	    try:
-		await self.client.connect()
-		self.get_logger().info("Connected")
-		connected = True
-	    except Exception as e:
-		self.get_logger().debug(str(e))
-		attempts += 1
-		
-	if not connected:
-	    self.get_logger().error("Failed to connect to trim tab controller. Is it on?")
+            try:
+                await self.client.connect()
+                self.get_logger().info("Connected")
+                connected = True
+            except Exception as e:
+                self.get_logger().debug(str(e))
+                attempts += 1
+
+        if not connected:
+            self.get_logger().error("Failed to connect to trim tab controller. Is it on?")
 
     async def _ble_disconnect(self):
         """ Attempt to disconnect from BLE [Asynchronous] """
