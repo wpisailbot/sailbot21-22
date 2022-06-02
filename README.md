@@ -25,6 +25,7 @@ Topics:
 - pwm_control
 - airmar_data
 - tt_control
+- tt_angle
 - tt_telemetry
 - tt_battery
 
@@ -37,10 +38,10 @@ Node Subscriptions and Publishing:
   - publishes to `serial_rc`
 - control_system
   - subscribes to `airmar_data`, `serial_rc`, `tt_telemetry`
-  - publishes to `pwm_control`, `tt_control`
+  - publishes to `pwm_control`, `tt_control`, `tt_angle`
 - trim_tab_comms
   - publishes to `tt_telemetry`, `tt_battery`
-  - subscribes to `tt_control`
+  - subscribes to `tt_control`, `tt_angle`
 - debug_interface
   - subscribes to `serial_rc`, `pwm_control`, `airmar_data`, `tt_control`, `tt_telemetry`, `tt_battery`
 
