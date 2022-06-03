@@ -25,10 +25,9 @@ setup(
             'pwm_controller = sailbot.pwm_controller:main',
             'serial_rc_receiver = sailbot.serial_rc_receiver:main',
             'control_system = sailbot.control_system:main',
-            'battery_monitor = sailbot.batteryMonitor:main',
             'trim_tab_comms = sailbot.trim_tab_comms:main',
             'debug_interface = sailbot.debug_interface:main',
-            'battery_monitor = sailbot.battery_monitor:main',
+            'battery_monitor = sailbot.batteryMonitor:main',
         ],
     },
 )
