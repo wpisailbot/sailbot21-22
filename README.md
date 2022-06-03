@@ -19,12 +19,15 @@ Nodes:
 - control_system
 - trim_tab_comms
 - debug_interface
+- battery_monitor
 
 Topics:
 - serial_rc
 - pwm_control
 - airmar_data
+- battery_status
 - tt_control
+- tt_angle
 - tt_telemetry
 - tt_battery
 
@@ -37,12 +40,14 @@ Node Subscriptions and Publishing:
   - publishes to `serial_rc`
 - control_system
   - subscribes to `airmar_data`, `serial_rc`, `tt_telemetry`
-  - publishes to `pwm_control`, `tt_control`
+  - publishes to `pwm_control`, `tt_control`, `tt_angle`
 - trim_tab_comms
   - publishes to `tt_telemetry`, `tt_battery`
-  - subscribes to `tt_control`
+  - subscribes to `tt_control`, `tt_angle`
 - debug_interface
   - subscribes to `serial_rc`, `pwm_control`, `airmar_data`, `tt_control`, `tt_telemetry`, `tt_battery`
+- battery_monitor
+  - publishes to `battery_status`
 
 ### ROS Architecture Summary
 
@@ -50,7 +55,7 @@ From a high level, the nodes are set up with the following intended functionalit
 
 On a per node basis, each node does the following:
 
-The Airmar reader handles the interpretation of all airmar information. The airmar communicates to the Maretron, which the main controller (a Jetson nano in our case) connects to over usb. The Maretron shows NEMA2000 messages which must be decoded into readable format. These messages are then published.
+The Airmar reader handles the interpretation of all airmar information. The airmar communicates to the Maretron, which the main controller (a Jetson nano in our case) connects to over usb. The Maretron shows NMEA2000 messages which must be decoded into readable format. These messages are then published.
 
 The PWM controller handles control of both the rudders and of the ballast. The node takes in messages with a channel and angle. Currently, the rudder is wired to channel 8, and the ballast to channel 12. The rudders move with a servo, so only an angle is needed. The ballast uses a motor controller, so the value will control speed.
 
@@ -62,6 +67,7 @@ The trim tab comms node connects to the trim tab controller, over a Bluetooth Lo
 
 The debug interface runs with the telemetry in order to gather data and show the current status of the boat.
 
+The battery monitor node reads from the battery monitor and publishes the approximate voltage
 
 ## ROS Dependencies
 
@@ -116,7 +122,7 @@ If you ever need to refresh your workspace (i.e. you build but it runs old code 
 
 The software in this repository leverages connections to a number of additional subsystems on the boat. The following repositories contain the software for these subsystems:
 
-- Trim Tab ([rigid_wing](https://github.com/wpisailbot/rigit_wing))
+- Trim Tab ([rigid_wing](https://github.com/wpisailbot/rigid_wing))
 - Telemetry Dashboard ([telemetry](https://github.com/wpisailbot/telemetry))
 
 

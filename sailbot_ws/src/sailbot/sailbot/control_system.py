@@ -2,7 +2,7 @@ from time import time
 import rclpy
 from rclpy.node import Node
 import json
-from std_msgs.msg import String, Float32, Int8
+from std_msgs.msg import String, Float32, Int8, Int16
 import sailbot.autonomous.p2p as p2p
 from collections import deque
 
@@ -40,6 +40,7 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
 
         # Create publisher to trim_tab_control
         self.trim_tab_control_publisher_ = self.create_publisher(Int8, 'tt_control', 10)
+        self.trim_tab_angle_publisher_ = self.create_publisher(Int16, 'tt_angle', 10)
 
         # Create publisher to ballast_algorithnm_debug
         self.ballast_algorithnm_debug_publisher_ = self.create_publisher(String, 'ballast_algorithnm_debug', 10)
@@ -189,12 +190,15 @@ def main(args=None):
             pass # Don't have rc values
         elif float(control_system.serial_rc["state2"]) > 600:  # in RC
             if float(control_system.serial_rc["state1"]) < 400:
-                # Manual - not currently implemented
-                # manual_angle = int((float(control_system.serial_rc["manual"]) / 2000) * 100) + 65
-                msg = Int8()
-                msg.data = 5
-                control_system.trim_tab_control_publisher_.publish(msg)
-            elif "apparentWind" in control_system.airmar_data:
+                # Manual
+                manual_angle = int((float(control_system.serial_rc["manual"]) / 2000) * 100) + 65
+                state_msg = Int8()
+                state_msg.data = 5
+                angle_msg = Int16()
+                angle_msg.data = manual_angle
+                control_system.trim_tab_control_publisher_.publish(state_msg)
+                control_system.trim_tab_angle_publisher_.publish(angle_msg)
+            elif "wind-angle-relative" in control_system.airmar_data:
                 # print(control_system.airmar_data["wind-angle-relative"])
                 try:
                     control_system.find_trim_tab_state(control_system.airmar_data["apparentWind"]["direction"])
