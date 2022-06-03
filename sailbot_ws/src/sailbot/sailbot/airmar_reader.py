@@ -99,7 +99,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 }
             elif(type_code == 'MWV'):
                 return {"apparentWind":
-                    {"speed": args[3],      #in knots
+                    {"speed": args[3],       #in knots 
                     "direction": args[1]   #in deg
                     }
                 }
