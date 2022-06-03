@@ -48,7 +48,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 if(args[4] == 'W'):
                     lon *= -1
 
-                return {"Latitude":lat, 
+                return {"Latitude":lat,
                         "Latitude-direction":args[2],
                         "Longitude":lon,
                         "Longitude-direction":args[4]}
@@ -72,7 +72,7 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 return ret
 
             elif(type_code == 'HDG'):
-                return {"magnetic-sensor-heading":args[1], #degrees
+                return {"currentHeading":args[1], #degrees
                         "magnetic-deviation":args[2], #degrees
                         "magnetic-deviation-direction":args[3],
                         "magnetic-variation":args[4], #degrees
@@ -90,25 +90,33 @@ class AirmarReader(Node): #translates airmar data into json and publishes on 'ai
                 return {} #not sure if needed
             elif(type_code == 'GRS'): #"The GRS message is used to support the Receiver Autonomous Integrity Monitoring (RAIM)." -- unneeded
                 return {}
-            elif(type_code == 'MWD'): 
-                return {"wind-angle-true":args[1], # in degrees
-                        "wind-speed-true-knots":args[5],
-                        "wind-speed-true-meters":args[7]} #in m/s
+            elif(type_code == 'MWD'):
+                return {"trueWind":
+                    {"speed": args[5],      #in knots
+                     #"speed": args[7]      for reporting in m/s
+                    "direction": args[1]   #in deg
+                    }
+                }
             elif(type_code == 'MWV'):
-                return {"wind-angle-relative":args[1], # in degrees
-                        "wind-speed-relative-meters":args[3]} #in m/s
+                return {"apparentWind":
+                    {"speed": args[3],       #in knots 
+                    "direction": args[1]   #in deg
+                    }
+                }
             elif(type_code == 'ZDA'): #date & time
                 return {} # unneeded
             elif(type_code == 'OUT'): #real key is 'PMAROUT', shortened to OUT, since all others are 3 letters
                 #"PGN is translated to a Maretron proprietary NMEA 0183 sentence " -- used for pitch and roll
-                return {"roll":args[2],
+                return { "pitchroll":
+                        {"roll":args[2],
                         "pitch":args[3]}
+                        }
             else:
                 raise ValueError("Unknown NEMA code: " + type_code)
         except Exception as e:
             print(e);
             return({})
-    
+
 
 def main(args=None):
     rclpy.init(args=args)

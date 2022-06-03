@@ -1,8 +1,11 @@
+from time import time
 import rclpy
 from rclpy.node import Node
 import json
 from std_msgs.msg import String, Float32, Int8, Int16
 import sailbot.autonomous.p2p as p2p
+from collections import deque
+
 
 class ControlSystem(Node):  # Gathers data from some nodes and distributes it to others
 
@@ -39,6 +42,9 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         self.trim_tab_control_publisher_ = self.create_publisher(Int8, 'tt_control', 10)
         self.trim_tab_angle_publisher_ = self.create_publisher(Int16, 'tt_angle', 10)
 
+        # Create publisher to ballast_algorithnm_debug
+        self.ballast_algorithnm_debug_publisher_ = self.create_publisher(String, 'ballast_algorithnm_debug', 10)
+
         # Create instance vars for subscribed topics to update
         self.serial_rc = {}
         self.airmar_data = {}
@@ -47,6 +53,12 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         # Create instance var for keeping queue of wind data
         self.lastWinds = []
         self.p2p_alg = None
+
+        # Create instance var for keeping queue of roll data
+        self.omega = deque(maxlen=4)
+        self.alpha = deque(maxlen=3)
+        self.lastRollAngle = deque(maxlen=4)
+        # self.p2p_alg = None
         
 
     def serial_rc_listener_callback(self, msg):
@@ -81,23 +93,27 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         smooth_angle = self.median(self.lastWinds)
         return smooth_angle
 
-    def find_trim_tab_state(self, relative_wind):
+    def find_trim_tab_state(self, relative_wind):           #five states of trim
         smooth_angle = self.update_winds(relative_wind)
+        msg = Int8()
         if 45.0 <= smooth_angle < 135:
             # Max lift port
-            self.trim_tab_control_publisher_.publish(0)
+            msg.data = (0)
         elif 135 <= smooth_angle < 180:
             # Max drag port
-            self.trim_tab_control_publisher_.publish(2)
+            msg.data = (2)
         elif 180 <= smooth_angle < 225:
             # Max drag starboard
-            self.trim_tab_control_publisher_.publish(3)
+            msg.data = (3)
         elif 225 <= smooth_angle < 315:
             # Max lift starboard
-            self.trim_tab_control_publisher_.publish(1)
+            msg.data = (1)
         else:
             # In irons, min lift
-            self.trim_tab_control_publisher_.publish(4)
+            msg.data = (4)
+
+        
+        self.trim_tab_control_publisher_.publish(msg)
             
     def make_json_string(self, json_msg):
         json_str = json.dumps(json_msg)
@@ -114,16 +130,34 @@ class ControlSystem(Node):  # Gathers data from some nodes and distributes it to
         # Check wind angle, then check current tilt of boat, then adjust ballast accordingly
         if len(self.lastWinds) == 0:
             return
+        self.lastRollAngle.append(self.airmar_data["roll"])
         smooth_angle = self.median(self.lastWinds)
         ballast_angle = 0
-        print("roll:" + self.airmar_data["roll"])
-        if 0 < smooth_angle <= 180:  # Starboard tack
+        #print("roll:" + self.airmar_data["roll"])
+        delta = self.airmar_data["roll"] - self.lastRollAngle[-1]
+        
+
+        timeDifference = .5     #hypothetically - see main
+        omega_n = delta/timeDifference
+        self.omega.append(omega_n)
+        alpha_n = self.omega[-1]/timeDifference
+        self.alpha.append(alpha_n)
+        #-- Logging ----------------
+        self.ballast_algorithnm_debug_publisher_.publish("omega: " + str(omega_n) + " -- " + "alpha / acceleration: " + str(alpha_n) + "\n")
+        #Account for a heavy tilt
+        
+         #-----------
+         # Starboard tack
+        if 0 < smooth_angle <= 180: 
             # Go for 20 degrees
-            if float(self.airmar_data["roll"]) > -12:
-                ballast_angle = 110
-            elif float(self.airmar_data["roll"]) < -20:
+            if float(self.airmar_data["roll"]) > -12:           #change to roll acc.
+                #ballast_angle = 110
+                ballast_angle = omega_n * 2
+            elif float(self.airmar_data["roll"]) < -20:         #change to roll acc.
                 ballast_angle = 80
-        elif 180 < smooth_angle < 360:  # Port tack
+                #-----------
+        # Port tack
+        elif 180 < smooth_angle < 360:  
             if float(self.airmar_data["roll"]) < 12:
                 ballast_angle = 80
             elif float(self.airmar_data["roll"]) > 20:
@@ -147,8 +181,8 @@ def main(args=None):
         # control_system.trim_tab_status
 
         # Need to publish new values to both control topics based on new values
-        # control_system.pwm_control_publisher_.publish()
-        # control_system.trim_tab_control_publisher_.publish()
+        # control_system.pwm_control_publisher_.publish()       <----- i think both of these are notes from last year and have since been implemented
+        # control_system.trim_tab_control_publisher_.publish()  <----- i think both of these are notes from last year and have since been implemented
 
         #TODO ^^implement
         
@@ -167,7 +201,7 @@ def main(args=None):
             elif "wind-angle-relative" in control_system.airmar_data:
                 # print(control_system.airmar_data["wind-angle-relative"])
                 try:
-                    control_system.find_trim_tab_state(control_system.airmar_data["wind-angle-relative"])
+                    control_system.find_trim_tab_state(control_system.airmar_data["apparentWind"]["direction"])
                 except Exception as e:
                     control_system.get_logger().error(str(e))
             else:
@@ -191,7 +225,7 @@ def main(args=None):
                 try:
                     if control_system.p2p_alg is None:  # Instantiate new
                         control_system.p2p_alg = p2p.P2P((float(control_system.airmar_data['Latitude']), float(control_system.airmar_data['Longitude'])), destinations[0])
-                    wind = control_system.update_winds(control_system.airmar_data["wind-angle-relative"])
+                    wind = control_system.update_winds(control_system.airmar_data["apparentWind"]["direction"])
                     action = control_system.p2p_alg.getAction(wind, float(control_system.airmar_data["magnetic-sensor-heading"]), float(control_system.airmar_data["track-degrees-true"]))
                     control_system.get_logger().error(str(control_system.p2p_alg.getdistance()))
                     control_system.get_logger().error(str(action))
