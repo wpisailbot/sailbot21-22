@@ -78,18 +78,30 @@ class DebugInterface(Node):
             self.pwm_control_listener_callback,
             10)
         self.pwm_control_subscription
+        
+    def safeTransfer(self, msg):         #Handles the HHTP requests, and handles Exceptions if they occur w/o interfering with callback funcitons
+        try:
+            requests.post(url, data=msg.data, headers=Headers)
+        except ConnectionError:
+            self.get_logger().info('The land-side server is not turned on.')
+            self.get_logger().info('Go to the telemetry repo and run command "npm start".')
+        except:
+            self.get_logger().info('Exception: requests.post has failed to communicate.')
+            self.get_logger().info('Check network connection, and make sure land-side server is running.')
 
     def serial_rc_listener_callback(self, msg):
         self.get_logger().info('Serial msg: "%s"' % msg.data)
-        requests.post(url, data=msg.data, headers=Headers)
+        self.safeTransfer(msg)
 
     def airmar_data_listener_callback(self, msg):
         self.get_logger().info('Airmar data: "%s"' % msg.data)
-        requests.post(url, data=msg.data, headers=Headers)
+        self.safeTransfer(msg)
+        
         # if data is in json format:
         #r = requests.post(url, data=(DATA_HERE), headers=Headers)
         # if data is in python dict format:
         #r = requests.post(url, json=(DATA_HERE))
+
     def d_heading_listener_callback(self, msg):
         self.get_logger().info('LowLevel data: desired heading = "%s"' % msg.data)
         #Note the heading is an INTEGER.
@@ -97,12 +109,14 @@ class DebugInterface(Node):
         requests.post(url, json=headingAsJson, headers=Headers)
     def trim_tab_telemetry_listener_callback(self, msg):
         self.get_logger().info('Trim Tab wind msg: "%s"' % msg.data)
-        requests.post(url, data=msg.data, headers=Headers)
+        self.safeTransfer(msg)
+        #requests.post(url, data=msg.data, headers=Headers)
 
     def trim_tab_battery_listener_callback(self, msg):
         #This node returns a percent FYI
         self.get_logger().info('Trim Tab battery msg: "%s"' % msg.data)
-        requests.post(url, data=msg.data, headers=Headers)
+        self.safeTransfer(msg)
+        #requests.post(url, data=msg.data, headers=Headers)
 
     def battery_status_listener_callback(self,msg):
         #this node returns an Integer, not a JSON
@@ -112,11 +126,16 @@ class DebugInterface(Node):
 
     def trim_tab_control_listener_callback(self, msg):
         self.get_logger().info('Trim Tab control msg: "%s"' % msg.data)
-        requests.post(url, data=msg.data, headers=Headers)
+        self.safeTransfer(msg)
+        #requests.post(url, data=msg.data, headers=Headers)
 
     def pwm_control_listener_callback(self, msg):
         self.get_logger().info('PWM msg: "%s"' % msg.data)
-        requests.post(url, data=msg.data, headers=Headers)
+        self.safeTransfer(msg)
+        #requests.post(url, data=msg.data, headers=Headers)
+    
+    
+    
     #For future use - You can add callbacks for any topic {ballast position, CV status,  Airmar accelerometer, etc} using the template below
         
     #TEMPLATE:
