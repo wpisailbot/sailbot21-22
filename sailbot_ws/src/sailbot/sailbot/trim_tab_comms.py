@@ -85,7 +85,7 @@ class TrimTabComms(Node):
         """ Attempt to establish a connection over BLE [Asynchronous] """
         attempts = 0
         connected = False
-        while not connected and attempts < 5:
+        while not connected:
             try:
                 await self.client.connect()
                 self.get_logger().info("Connected")
@@ -94,8 +94,8 @@ class TrimTabComms(Node):
                 self.get_logger().debug(str(e))
                 attempts += 1
 
-        if not connected:
-            self.get_logger().error("Failed to connect to trim tab controller. Is it on?")
+            if attempts >= 5:
+                self.get_logger().error("Failed to connect to trim tab controller. Is it on?")
 
     async def _ble_disconnect(self):
         """ Attempt to disconnect from BLE [Asynchronous] """
