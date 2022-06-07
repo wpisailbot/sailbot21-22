@@ -1,0 +1,9 @@
+[console_scripts]
+airmar_reader = sailbot.airmar_reader:main
+battery_monitor = sailbot.batteryMonitor:main
+control_system = sailbot.control_system:main
+debug_interface = sailbot.debug_interface:main
+pwm_controller = sailbot.pwm_controller:main
+serial_rc_receiver = sailbot.serial_rc_receiver:main
+trim_tab_comms = sailbot.trim_tab_comms:main
+

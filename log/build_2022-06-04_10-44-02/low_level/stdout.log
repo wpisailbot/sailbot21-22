@@ -1,0 +1,58 @@
+running egg_info
+creating ../../../build/low_level/low_level.egg-info
+writing ../../../build/low_level/low_level.egg-info/PKG-INFO
+writing dependency_links to ../../../build/low_level/low_level.egg-info/dependency_links.txt
+writing entry points to ../../../build/low_level/low_level.egg-info/entry_points.txt
+writing requirements to ../../../build/low_level/low_level.egg-info/requires.txt
+writing top-level names to ../../../build/low_level/low_level.egg-info/top_level.txt
+writing manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'
+reading manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'
+writing manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/sailbot/sailbot21-22/build/low_level/build
+creating /home/sailbot/sailbot21-22/build/low_level/build/lib
+creating /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+copying low_level/desired_heading_publisher.py -> /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+copying low_level/rudder_test.py -> /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+copying low_level/lat_long_publisher.py -> /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+copying low_level/standalone_trim_tab_state_publisher.py -> /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+copying low_level/__init__.py -> /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+copying low_level/point_to_point.py -> /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+copying low_level/rudder_control.py -> /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level
+running install
+running install_lib
+creating /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/desired_heading_publisher.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/rudder_test.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/lat_long_publisher.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/standalone_trim_tab_state_publisher.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/__init__.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/point_to_point.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/rudder_control.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/desired_heading_publisher.py to desired_heading_publisher.cpython-36.pyc
+byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/rudder_test.py to rudder_test.cpython-36.pyc
+byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/lat_long_publisher.py to lat_long_publisher.cpython-36.pyc
+byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/standalone_trim_tab_state_publisher.py to standalone_trim_tab_state_publisher.cpython-36.pyc
+byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/__init__.py to __init__.cpython-36.pyc
+byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/point_to_point.py to point_to_point.cpython-36.pyc
+byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/rudder_control.py to rudder_control.cpython-36.pyc
+running install_data
+creating /home/sailbot/sailbot21-22/install/low_level/share/ament_index
+creating /home/sailbot/sailbot21-22/install/low_level/share/ament_index/resource_index
+creating /home/sailbot/sailbot21-22/install/low_level/share/ament_index/resource_index/packages
+copying resource/low_level -> /home/sailbot/sailbot21-22/install/low_level/share/ament_index/resource_index/packages
+copying package.xml -> /home/sailbot/sailbot21-22/install/low_level/share/low_level
+creating /home/sailbot/sailbot21-22/install/low_level/share/low_level/launch
+copying launch/rudder_test.py -> /home/sailbot/sailbot21-22/install/low_level/share/low_level/launch
+copying launch/point2point_test.py -> /home/sailbot/sailbot21-22/install/low_level/share/low_level/launch
+running install_egg_info
+Copying ../../../build/low_level/low_level.egg-info to /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level-0.0.0-py3.6.egg-info
+running install_scripts
+Installing desired_heading script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+Installing point2point script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+Installing rudder_control script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+Installing rudder_test script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+Installing target_location script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+Installing tt_state_pub script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+writing list of installed files to '/home/sailbot/sailbot21-22/build/low_level/install.log'

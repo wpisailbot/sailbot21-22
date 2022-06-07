@@ -143,7 +143,7 @@ class DebugInterface(Node):
 
     def pwm_control_listener_callback(self, msg):
         self.get_logger().info('PWM msg: "%s"' % msg.data)
-        self.safeTrasfer(msg)
+        self.safeTransfer(msg)
         #requests.post(url, data=msg.data, headers=Headers)
 
     #For future use - You can add callbacks for any topic {ballast position, CV status,  Airmar accelerometer, etc} using the template below

@@ -1,0 +1,198 @@
+[1.930s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[1.930s] DEBUG:colcon:Parsed command line arguments: Namespace(ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7fb13ecef0>>, merge_install=False, metas=['./colcon.meta'], packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=4, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7fb13ecef0>, verb_name='build', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7fb1246898>)
+[1.976s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.977s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.977s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.978s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.978s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.980s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.980s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/sailbot/sailbot21-22'
+[1.981s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.981s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.982s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.982s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.982s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.983s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.983s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.983s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.983s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[2.467s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[2.467s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[2.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[2.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[2.468s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[2.469s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[2.469s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[2.470s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[2.472s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[2.472s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[2.473s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[2.473s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[2.474s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[2.474s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[2.475s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extensions ['ignore', 'ignore_ament_install']
+[2.476s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'ignore'
+[2.476s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'ignore_ament_install'
+[2.476s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extensions ['colcon_pkg']
+[2.477s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'colcon_pkg'
+[2.477s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extensions ['colcon_meta']
+[2.477s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'colcon_meta'
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extensions ['ros']
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'ros'
+[2.478s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extensions ['cmake', 'python']
+[2.479s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'cmake'
+[2.479s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'python'
+[2.479s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extensions ['python_setup_py']
+[2.480s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws) by extension 'python_setup_py'
+[2.480s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/build) by extensions ['ignore', 'ignore_ament_install']
+[2.481s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/build) by extension 'ignore'
+[2.482s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/build) ignored
+[2.482s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/install) by extensions ['ignore', 'ignore_ament_install']
+[2.483s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/install) by extension 'ignore'
+[2.483s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/install) ignored
+[2.485s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/log) by extensions ['ignore', 'ignore_ament_install']
+[2.486s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/log) by extension 'ignore'
+[2.486s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/log) ignored
+[2.486s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extensions ['ignore', 'ignore_ament_install']
+[2.487s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'ignore'
+[2.487s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'ignore_ament_install'
+[2.488s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extensions ['colcon_pkg']
+[2.488s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'colcon_pkg'
+[2.488s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extensions ['colcon_meta']
+[2.488s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'colcon_meta'
+[2.489s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extensions ['ros']
+[2.489s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'ros'
+[2.489s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extensions ['cmake', 'python']
+[2.490s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'cmake'
+[2.490s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'python'
+[2.490s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extensions ['python_setup_py']
+[2.491s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src) by extension 'python_setup_py'
+[2.491s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extensions ['ignore', 'ignore_ament_install']
+[2.492s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extension 'ignore'
+[2.492s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extension 'ignore_ament_install'
+[2.493s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extensions ['colcon_pkg']
+[2.493s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extension 'colcon_pkg'
+[2.493s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extensions ['colcon_meta']
+[2.494s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extension 'colcon_meta'
+[2.494s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extensions ['ros']
+[2.494s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/low_level) by extension 'ros'
+[2.506s] DEBUG:colcon.colcon_core.package_identification:Package 'sailbot_ws/src/low_level' with type 'ros.ament_python' and name 'low_level'
+[2.507s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extensions ['ignore', 'ignore_ament_install']
+[2.507s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extension 'ignore'
+[2.508s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extension 'ignore_ament_install'
+[2.508s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extensions ['colcon_pkg']
+[2.508s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extension 'colcon_pkg'
+[2.509s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extensions ['colcon_meta']
+[2.509s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extension 'colcon_meta'
+[2.509s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extensions ['ros']
+[2.510s] Level 1:colcon.colcon_core.package_identification:_identify(sailbot_ws/src/sailbot) by extension 'ros'
+[2.514s] DEBUG:colcon.colcon_core.package_identification:Package 'sailbot_ws/src/sailbot' with type 'ros.ament_python' and name 'sailbot'
+[2.515s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[2.516s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[2.516s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[2.516s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[2.517s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[2.657s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'cmake_args' from command line to 'None'
+[2.657s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'cmake_target' from command line to 'None'
+[2.658s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.658s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'cmake_clean_cache' from command line to 'False'
+[2.658s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'cmake_clean_first' from command line to 'False'
+[2.658s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'cmake_force_configure' from command line to 'False'
+[2.659s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'ament_cmake_args' from command line to 'None'
+[2.659s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'catkin_cmake_args' from command line to 'None'
+[2.659s] Level 5:colcon.colcon_core.verb:set package 'low_level' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.659s] DEBUG:colcon.colcon_core.verb:Building package 'low_level' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/sailbot/sailbot21-22/build/low_level', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sailbot/sailbot21-22/install/low_level', 'merge_install': False, 'path': '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level', 'symlink_install': False, 'test_result_base': None}
+[2.697s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'cmake_args' from command line to 'None'
+[2.698s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'cmake_target' from command line to 'None'
+[2.698s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[2.698s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'cmake_clean_cache' from command line to 'False'
+[2.698s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'cmake_clean_first' from command line to 'False'
+[2.699s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'cmake_force_configure' from command line to 'False'
+[2.699s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'ament_cmake_args' from command line to 'None'
+[2.699s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'catkin_cmake_args' from command line to 'None'
+[2.699s] Level 5:colcon.colcon_core.verb:set package 'sailbot' build argument 'catkin_skip_building_tests' from command line to 'False'
+[2.700s] DEBUG:colcon.colcon_core.verb:Building package 'sailbot' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/sailbot/sailbot21-22/build/sailbot', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/sailbot/sailbot21-22/install/sailbot', 'merge_install': False, 'path': '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot', 'symlink_install': False, 'test_result_base': None}
+[2.702s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[2.747s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[2.748s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level' with build type 'ament_python'
+[2.749s] Level 1:colcon.colcon_core.shell:create_environment_hook('low_level', 'ament_prefix_path')
+[2.770s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[2.772s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/low_level/share/low_level/hook/ament_prefix_path.ps1'
+[2.782s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sailbot/sailbot21-22/install/low_level/share/low_level/hook/ament_prefix_path.dsv'
+[2.790s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/low_level/share/low_level/hook/ament_prefix_path.sh'
+[2.797s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.797s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.816s] DEBUG:colcon.colcon_core.shell:Ignoring prefix path '/opt/ros/dashing'
+[2.832s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot' with build type 'ament_python'
+[2.834s] Level 1:colcon.colcon_core.shell:create_environment_hook('sailbot', 'ament_prefix_path')
+[2.839s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/hook/ament_prefix_path.ps1'
+[2.847s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/hook/ament_prefix_path.dsv'
+[2.850s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/hook/ament_prefix_path.sh'
+[2.855s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.856s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.868s] DEBUG:colcon.colcon_core.shell:Ignoring prefix path '/opt/ros/dashing'
+[4.555s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level'
+[4.559s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[4.560s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.593s] DEBUG:colcon.colcon_core.shell:Ignoring prefix path '/opt/ros/dashing'
+[6.321s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot'
+[6.326s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[6.326s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[6.340s] DEBUG:colcon.colcon_core.shell:Ignoring prefix path '/opt/ros/dashing'
+[6.377s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level': PYTHONPATH=/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/low_level build --build-base /home/sailbot/sailbot21-22/build/low_level/build install --prefix /home/sailbot/sailbot21-22/install/low_level --record /home/sailbot/sailbot21-22/build/low_level/install.log --single-version-externally-managed
+[6.417s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot': PYTHONPATH=/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/sailbot build --build-base /home/sailbot/sailbot21-22/build/sailbot/build install --prefix /home/sailbot/sailbot21-22/install/sailbot --record /home/sailbot/sailbot21-22/build/sailbot/install.log --single-version-externally-managed
+[9.247s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level' returned '0': PYTHONPATH=/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/low_level build --build-base /home/sailbot/sailbot21-22/build/low_level/build install --prefix /home/sailbot/sailbot21-22/install/low_level --record /home/sailbot/sailbot21-22/build/low_level/install.log --single-version-externally-managed
+[9.278s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/low_level' for CMake module files
+[9.283s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/low_level' for CMake config files
+[9.294s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/low_level/lib'
+[9.295s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/low_level/bin'
+[9.296s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/low_level/lib/pkgconfig/low_level.pc'
+[9.296s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages'
+[9.297s] Level 1:colcon.colcon_core.shell:create_environment_hook('low_level', 'pythonpath')
+[9.301s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/low_level/share/low_level/hook/pythonpath.ps1'
+[9.304s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sailbot/sailbot21-22/install/low_level/share/low_level/hook/pythonpath.dsv'
+[9.306s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/low_level/share/low_level/hook/pythonpath.sh'
+[9.308s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(low_level)
+[9.332s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/low_level/share/low_level/package.ps1'
+[9.343s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/sailbot/sailbot21-22/install/low_level/share/low_level/package.dsv'
+[9.347s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/low_level/share/low_level/package.sh'
+[9.352s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/low_level/share/low_level/package.bash'
+[9.363s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/low_level/share/low_level/package.zsh'
+[9.368s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/sailbot/sailbot21-22/install/low_level/share/colcon-core/packages/low_level)
+[9.379s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/sailbot' for CMake module files
+[9.382s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot' returned '0': PYTHONPATH=/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/sailbot build --build-base /home/sailbot/sailbot21-22/build/sailbot/build install --prefix /home/sailbot/sailbot21-22/install/sailbot --record /home/sailbot/sailbot21-22/build/sailbot/install.log --single-version-externally-managed
+[9.385s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/sailbot' for CMake config files
+[9.395s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/sailbot/lib'
+[9.396s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/sailbot/bin'
+[9.396s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/sailbot/lib/pkgconfig/sailbot.pc'
+[9.397s] Level 1:colcon.colcon_core.environment:checking '/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages'
+[9.397s] Level 1:colcon.colcon_core.shell:create_environment_hook('sailbot', 'pythonpath')
+[9.401s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/hook/pythonpath.ps1'
+[9.403s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/hook/pythonpath.dsv'
+[9.406s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/hook/pythonpath.sh'
+[9.408s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(sailbot)
+[9.413s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/package.ps1'
+[9.415s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/package.dsv'
+[9.418s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/package.sh'
+[9.420s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/package.bash'
+[9.422s] INFO:colcon.colcon_core.shell:Creating package script '/home/sailbot/sailbot21-22/install/sailbot/share/sailbot/package.zsh'
+[9.424s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/sailbot/sailbot21-22/install/sailbot/share/colcon-core/packages/sailbot)
+[9.429s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[9.431s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[9.431s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[9.432s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[9.471s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[9.472s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[9.472s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[9.520s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.Spawn.ChildExited: Process org.freedesktop.Notifications exited with status 1
+[9.521s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[9.525s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sailbot/sailbot21-22/install/local_setup.ps1'
+[9.531s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/sailbot/sailbot21-22/install/_local_setup_util_ps1.py'
+[9.541s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sailbot/sailbot21-22/install/setup.ps1'
+[9.586s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sailbot/sailbot21-22/install/local_setup.sh'
+[9.591s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/sailbot/sailbot21-22/install/_local_setup_util_sh.py'
+[9.593s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sailbot/sailbot21-22/install/setup.sh'
+[9.623s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sailbot/sailbot21-22/install/local_setup.bash'
+[9.634s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sailbot/sailbot21-22/install/setup.bash'
+[9.665s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/sailbot/sailbot21-22/install/local_setup.zsh'
+[9.668s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/sailbot/sailbot21-22/install/setup.zsh'

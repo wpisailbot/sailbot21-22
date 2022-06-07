@@ -1,0 +1,54 @@
+[4.727s] Invoking command in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level': PYTHONPATH=/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/low_level build --build-base /home/sailbot/sailbot21-22/build/low_level/build install --prefix /home/sailbot/sailbot21-22/install/low_level --record /home/sailbot/sailbot21-22/build/low_level/install.log --single-version-externally-managed
+[6.853s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead
+[6.854s]   % (opt, underscore_opt)
+[6.855s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'install-scripts' will not be supported in future versions. Please use the underscore name 'install_scripts' instead
+[6.856s]   % (opt, underscore_opt)
+[7.113s] running egg_info
+[7.120s] writing ../../../build/low_level/low_level.egg-info/PKG-INFO
+[7.122s] writing dependency_links to ../../../build/low_level/low_level.egg-info/dependency_links.txt
+[7.124s] writing entry points to ../../../build/low_level/low_level.egg-info/entry_points.txt
+[7.125s] writing requirements to ../../../build/low_level/low_level.egg-info/requires.txt
+[7.126s] writing top-level names to ../../../build/low_level/low_level.egg-info/top_level.txt
+[7.138s] reading manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'
+[7.146s] writing manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'
+[7.147s] running build
+[7.148s] running build_py
+[7.153s] running install
+[7.154s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/command/install.py:37: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[7.155s]   setuptools.SetuptoolsDeprecationWarning,
+[7.158s] running install_lib
+[7.162s] creating /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.163s] copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/desired_heading_publisher.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.170s] copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/rudder_test.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.180s] copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/lat_long_publisher.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.183s] copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/standalone_trim_tab_state_publisher.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.184s] copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/__init__.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.185s] copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/point_to_point.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.186s] copying /home/sailbot/sailbot21-22/build/low_level/build/lib/low_level/rudder_control.py -> /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level
+[7.188s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/desired_heading_publisher.py to desired_heading_publisher.cpython-36.pyc
+[7.190s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/rudder_test.py to rudder_test.cpython-36.pyc
+[7.192s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/lat_long_publisher.py to lat_long_publisher.cpython-36.pyc
+[7.194s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/standalone_trim_tab_state_publisher.py to standalone_trim_tab_state_publisher.cpython-36.pyc
+[7.196s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/__init__.py to __init__.cpython-36.pyc
+[7.197s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/point_to_point.py to point_to_point.cpython-36.pyc
+[7.213s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/rudder_control.py to rudder_control.cpython-36.pyc
+[7.218s] running install_data
+[7.221s] creating /home/sailbot/sailbot21-22/install/low_level/share/ament_index
+[7.222s] creating /home/sailbot/sailbot21-22/install/low_level/share/ament_index/resource_index
+[7.222s] creating /home/sailbot/sailbot21-22/install/low_level/share/ament_index/resource_index/packages
+[7.223s] copying resource/low_level -> /home/sailbot/sailbot21-22/install/low_level/share/ament_index/resource_index/packages
+[7.224s] copying package.xml -> /home/sailbot/sailbot21-22/install/low_level/share/low_level
+[7.224s] creating /home/sailbot/sailbot21-22/install/low_level/share/low_level/launch
+[7.225s] copying launch/rudder_test.py -> /home/sailbot/sailbot21-22/install/low_level/share/low_level/launch
+[7.225s] copying launch/point2point_test.py -> /home/sailbot/sailbot21-22/install/low_level/share/low_level/launch
+[7.226s] running install_egg_info
+[7.243s] Copying ../../../build/low_level/low_level.egg-info to /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level-0.0.0-py3.6.egg-info
+[7.247s] running install_scripts
+[7.432s] Installing desired_heading script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[7.432s] Installing point2point script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[7.433s] Installing rudder_control script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[7.434s] Installing rudder_test script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[7.434s] Installing target_location script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[7.435s] Installing tt_state_pub script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[7.436s] writing list of installed files to '/home/sailbot/sailbot21-22/build/low_level/install.log'
+[7.676s] Invoked command in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level' returned '0': PYTHONPATH=/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/low_level build --build-base /home/sailbot/sailbot21-22/build/low_level/build install --prefix /home/sailbot/sailbot21-22/install/low_level --record /home/sailbot/sailbot21-22/build/low_level/install.log --single-version-externally-managed

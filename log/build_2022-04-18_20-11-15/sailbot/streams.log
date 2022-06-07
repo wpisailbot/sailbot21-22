@@ -1,0 +1,80 @@
+[3.013s] Invoking command in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot': PYTHONPATH=/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/sailbot build --build-base /home/sailbot/sailbot21-22/build/sailbot/build install --prefix /home/sailbot/sailbot21-22/install/sailbot --record /home/sailbot/sailbot21-22/build/sailbot/install.log --single-version-externally-managed
+[4.209s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead
+[4.209s]   % (opt, underscore_opt)
+[4.210s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'install-scripts' will not be supported in future versions. Please use the underscore name 'install_scripts' instead
+[4.210s]   % (opt, underscore_opt)
+[4.375s] running egg_info
+[4.377s] creating ../../../build/sailbot/sailbot.egg-info
+[4.379s] writing ../../../build/sailbot/sailbot.egg-info/PKG-INFO
+[4.380s] writing dependency_links to ../../../build/sailbot/sailbot.egg-info/dependency_links.txt
+[4.381s] writing entry points to ../../../build/sailbot/sailbot.egg-info/entry_points.txt
+[4.382s] writing requirements to ../../../build/sailbot/sailbot.egg-info/requires.txt
+[4.383s] writing top-level names to ../../../build/sailbot/sailbot.egg-info/top_level.txt
+[4.384s] writing manifest file '../../../build/sailbot/sailbot.egg-info/SOURCES.txt'
+[4.392s] reading manifest file '../../../build/sailbot/sailbot.egg-info/SOURCES.txt'
+[4.400s] writing manifest file '../../../build/sailbot/sailbot.egg-info/SOURCES.txt'
+[4.401s] running build
+[4.401s] running build_py
+[4.404s] creating /home/sailbot/sailbot21-22/build/sailbot/build
+[4.405s] creating /home/sailbot/sailbot21-22/build/sailbot/build/lib
+[4.406s] creating /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.407s] copying sailbot/trim_tab_comms.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.407s] copying sailbot/airmar_reader.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.409s] copying sailbot/serial_rc_receiver.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.410s] copying sailbot/highlvlpathing.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.411s] copying sailbot/__init__.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.413s] copying sailbot/debug_interface.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.414s] copying sailbot/pwm_controller.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.415s] copying sailbot/control_system.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot
+[4.416s] creating /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/autonomous
+[4.417s] copying sailbot/autonomous/highlvlpathing.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/autonomous
+[4.418s] copying sailbot/autonomous/__init__.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/autonomous
+[4.419s] copying sailbot/autonomous/p2p.py -> /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/autonomous
+[4.420s] running install
+[4.421s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/command/install.py:37: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[4.421s]   setuptools.SetuptoolsDeprecationWarning,
+[4.423s] running install_lib
+[4.427s] creating /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.429s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/trim_tab_comms.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.430s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/airmar_reader.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.430s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/serial_rc_receiver.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.431s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/highlvlpathing.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.433s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/__init__.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.434s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/debug_interface.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.434s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/pwm_controller.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.435s] creating /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/autonomous
+[4.437s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/autonomous/highlvlpathing.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/autonomous
+[4.437s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/autonomous/__init__.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/autonomous
+[4.438s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/autonomous/p2p.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/autonomous
+[4.439s] copying /home/sailbot/sailbot21-22/build/sailbot/build/lib/sailbot/control_system.py -> /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot
+[4.441s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/trim_tab_comms.py to trim_tab_comms.cpython-36.pyc
+[4.443s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/airmar_reader.py to airmar_reader.cpython-36.pyc
+[4.444s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/serial_rc_receiver.py to serial_rc_receiver.cpython-36.pyc
+[4.446s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/highlvlpathing.py to highlvlpathing.cpython-36.pyc
+[4.454s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/__init__.py to __init__.cpython-36.pyc
+[4.454s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/debug_interface.py to debug_interface.cpython-36.pyc
+[4.455s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/pwm_controller.py to pwm_controller.cpython-36.pyc
+[4.458s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/autonomous/highlvlpathing.py to highlvlpathing.cpython-36.pyc
+[4.468s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/autonomous/__init__.py to __init__.cpython-36.pyc
+[4.469s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/autonomous/p2p.py to p2p.cpython-36.pyc
+[4.473s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/control_system.py to control_system.cpython-36.pyc
+[4.479s] running install_data
+[4.481s] creating /home/sailbot/sailbot21-22/install/sailbot/share/ament_index
+[4.482s] creating /home/sailbot/sailbot21-22/install/sailbot/share/ament_index/resource_index
+[4.482s] creating /home/sailbot/sailbot21-22/install/sailbot/share/ament_index/resource_index/packages
+[4.483s] copying resource/sailbot -> /home/sailbot/sailbot21-22/install/sailbot/share/ament_index/resource_index/packages
+[4.484s] copying package.xml -> /home/sailbot/sailbot21-22/install/sailbot/share/sailbot
+[4.484s] creating /home/sailbot/sailbot21-22/install/sailbot/share/sailbot/launch
+[4.485s] copying launch/full_debug.py -> /home/sailbot/sailbot21-22/install/sailbot/share/sailbot/launch
+[4.486s] copying launch/full_launch.py -> /home/sailbot/sailbot21-22/install/sailbot/share/sailbot/launch
+[4.486s] running install_egg_info
+[4.493s] Copying ../../../build/sailbot/sailbot.egg-info to /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot-1.0.0-py3.6.egg-info
+[4.497s] running install_scripts
+[4.579s] Installing airmar_reader script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.580s] Installing control_system script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.581s] Installing debug_interface script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.582s] Installing pwm_controller script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.583s] Installing serial_rc_receiver script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.583s] Installing trim_tab_comms script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.585s] writing list of installed files to '/home/sailbot/sailbot21-22/build/sailbot/install.log'
+[4.774s] Invoked command in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot' returned '0': PYTHONPATH=/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/sailbot build --build-base /home/sailbot/sailbot21-22/build/sailbot/build install --prefix /home/sailbot/sailbot21-22/install/sailbot --record /home/sailbot/sailbot21-22/build/sailbot/install.log --single-version-externally-managed
