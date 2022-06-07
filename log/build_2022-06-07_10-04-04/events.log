@@ -1,0 +1,126 @@
+[0.000000] (-) TimerEvent: {}
+[0.001426] (low_level) JobQueued: {'identifier': 'low_level', 'dependencies': OrderedDict()}
+[0.001633] (sailbot) JobQueued: {'identifier': 'sailbot', 'dependencies': OrderedDict()}
+[0.001795] (low_level) JobStarted: {'identifier': 'low_level'}
+[0.060314] (sailbot) JobStarted: {'identifier': 'sailbot'}
+[0.096235] (-) TimerEvent: {}
+[0.197692] (-) TimerEvent: {}
+[0.298653] (-) TimerEvent: {}
+[0.399431] (-) TimerEvent: {}
+[0.500185] (-) TimerEvent: {}
+[0.600931] (-) TimerEvent: {}
+[0.701624] (-) TimerEvent: {}
+[0.802357] (-) TimerEvent: {}
+[0.903079] (-) TimerEvent: {}
+[1.003798] (-) TimerEvent: {}
+[1.104473] (-) TimerEvent: {}
+[1.205205] (-) TimerEvent: {}
+[1.305956] (-) TimerEvent: {}
+[1.406686] (-) TimerEvent: {}
+[1.507406] (-) TimerEvent: {}
+[1.608347] (-) TimerEvent: {}
+[1.709368] (-) TimerEvent: {}
+[1.810066] (-) TimerEvent: {}
+[1.910760] (-) TimerEvent: {}
+[2.011457] (-) TimerEvent: {}
+[2.112200] (-) TimerEvent: {}
+[2.212881] (-) TimerEvent: {}
+[2.313594] (-) TimerEvent: {}
+[2.414267] (-) TimerEvent: {}
+[2.514932] (-) TimerEvent: {}
+[2.615612] (-) TimerEvent: {}
+[2.716317] (-) TimerEvent: {}
+[2.817081] (-) TimerEvent: {}
+[2.917802] (-) TimerEvent: {}
+[3.019449] (-) TimerEvent: {}
+[3.024765] (low_level) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../../build/low_level', 'build', '--build-base', '/home/sailbot/sailbot21-22/build/low_level/build', 'install', '--prefix', '/home/sailbot/sailbot21-22/install/low_level', '--record', '/home/sailbot/sailbot21-22/build/low_level/install.log', '--single-version-externally-managed'], 'cwd': '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'MAIL': '/var/mail/sailbot', 'USER': 'sailbot', 'SSH_CLIENT': 'fe80::bc1d:c722:c8e7:8f80%eth0 17196 22', 'LD_LIBRARY_PATH': '/opt/ros/dashing/opt/yaml_cpp_vendor/lib:/opt/ros/dashing/lib', 'SHLVL': '1', 'OLDPWD': '/home/sailbot', 'HOME': '/home/sailbot', 'SSH_TTY': '/dev/pts/2', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/sailbot/sailbot21-22/install', 'ROS_DISTRO': 'dashing', 'LOGNAME': 'sailbot', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_ID': '6', 'TERM': 'xterm-256color', 'PATH': '/home/sailbot/.local/bin:/opt/ros/dashing/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/sailbot/sailbot21-22/install/sailbot:/home/sailbot/sailbot21-22/install/low_level:/opt/ros/dashing', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/sailbot/sailbot21-22/build/low_level', 'SSH_CONNECTION': 'fe80::bc1d:c722:c8e7:8f80%eth0 17196 fe80::204:4bff:feec:70f7%eth0 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:/opt/ros/dashing/lib/python3.6/site-packages', 'COLCON': '1'}, 'shell': False}
+[3.045716] (sailbot) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../../build/sailbot', 'build', '--build-base', '/home/sailbot/sailbot21-22/build/sailbot/build', 'install', '--prefix', '/home/sailbot/sailbot21-22/install/sailbot', '--record', '/home/sailbot/sailbot21-22/build/sailbot/install.log', '--single-version-externally-managed'], 'cwd': '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'MAIL': '/var/mail/sailbot', 'USER': 'sailbot', 'SSH_CLIENT': 'fe80::bc1d:c722:c8e7:8f80%eth0 17196 22', 'LD_LIBRARY_PATH': '/opt/ros/dashing/opt/yaml_cpp_vendor/lib:/opt/ros/dashing/lib', 'SHLVL': '1', 'OLDPWD': '/home/sailbot', 'HOME': '/home/sailbot', 'SSH_TTY': '/dev/pts/2', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/sailbot/sailbot21-22/install', 'ROS_DISTRO': 'dashing', 'LOGNAME': 'sailbot', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_ID': '6', 'TERM': 'xterm-256color', 'PATH': '/home/sailbot/.local/bin:/opt/ros/dashing/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/sailbot/sailbot21-22/install/sailbot:/home/sailbot/sailbot21-22/install/low_level:/opt/ros/dashing', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/sailbot/sailbot21-22/build/sailbot', 'SSH_CONNECTION': 'fe80::bc1d:c722:c8e7:8f80%eth0 17196 fe80::204:4bff:feec:70f7%eth0 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:/opt/ros/dashing/lib/python3.6/site-packages', 'COLCON': '1'}, 'shell': False}
+[3.119622] (-) TimerEvent: {}
+[3.220434] (-) TimerEvent: {}
+[3.321205] (-) TimerEvent: {}
+[3.421901] (-) TimerEvent: {}
+[3.522965] (-) TimerEvent: {}
+[3.623843] (-) TimerEvent: {}
+[3.724670] (-) TimerEvent: {}
+[3.825775] (-) TimerEvent: {}
+[3.926702] (-) TimerEvent: {}
+[4.027897] (-) TimerEvent: {}
+[4.128704] (-) TimerEvent: {}
+[4.229527] (-) TimerEvent: {}
+[4.266544] (low_level) StderrLine: {'line': b"/home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead\n"}
+[4.267306] (low_level) StderrLine: {'line': b'  % (opt, underscore_opt)\n'}
+[4.268406] (low_level) StderrLine: {'line': b"/home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'install-scripts' will not be supported in future versions. Please use the underscore name 'install_scripts' instead\n"}
+[4.268944] (low_level) StderrLine: {'line': b'  % (opt, underscore_opt)\n'}
+[4.276742] (sailbot) StderrLine: {'line': b"/home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead\n"}
+[4.277904] (sailbot) StderrLine: {'line': b'  % (opt, underscore_opt)\n'}
+[4.278995] (sailbot) StderrLine: {'line': b"/home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'install-scripts' will not be supported in future versions. Please use the underscore name 'install_scripts' instead\n"}
+[4.279590] (sailbot) StderrLine: {'line': b'  % (opt, underscore_opt)\n'}
+[4.329740] (-) TimerEvent: {}
+[4.430441] (-) TimerEvent: {}
+[4.440651] (low_level) StdoutLine: {'line': b'running egg_info\n'}
+[4.443730] (low_level) StdoutLine: {'line': b'writing ../../../build/low_level/low_level.egg-info/PKG-INFO\n'}
+[4.445789] (low_level) StdoutLine: {'line': b'writing dependency_links to ../../../build/low_level/low_level.egg-info/dependency_links.txt\n'}
+[4.446649] (low_level) StdoutLine: {'line': b'writing entry points to ../../../build/low_level/low_level.egg-info/entry_points.txt\n'}
+[4.447162] (low_level) StdoutLine: {'line': b'writing requirements to ../../../build/low_level/low_level.egg-info/requires.txt\n'}
+[4.447651] (low_level) StdoutLine: {'line': b'writing top-level names to ../../../build/low_level/low_level.egg-info/top_level.txt\n'}
+[4.450923] (sailbot) StdoutLine: {'line': b'running egg_info\n'}
+[4.453945] (sailbot) StdoutLine: {'line': b'writing ../../../build/sailbot/sailbot.egg-info/PKG-INFO\n'}
+[4.454834] (sailbot) StdoutLine: {'line': b'writing dependency_links to ../../../build/sailbot/sailbot.egg-info/dependency_links.txt\n'}
+[4.455759] (low_level) StdoutLine: {'line': b"reading manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'\n"}
+[4.456446] (sailbot) StdoutLine: {'line': b'writing entry points to ../../../build/sailbot/sailbot.egg-info/entry_points.txt\n'}
+[4.457019] (sailbot) StdoutLine: {'line': b'writing requirements to ../../../build/sailbot/sailbot.egg-info/requires.txt\n'}
+[4.457597] (sailbot) StdoutLine: {'line': b'writing top-level names to ../../../build/sailbot/sailbot.egg-info/top_level.txt\n'}
+[4.462832] (low_level) StdoutLine: {'line': b"writing manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'\n"}
+[4.463653] (low_level) StdoutLine: {'line': b'running build\n'}
+[4.464207] (low_level) StdoutLine: {'line': b'running build_py\n'}
+[4.465396] (sailbot) StdoutLine: {'line': b"reading manifest file '../../../build/sailbot/sailbot.egg-info/SOURCES.txt'\n"}
+[4.467169] (low_level) StdoutLine: {'line': b'running install\n'}
+[4.467835] (low_level) StderrLine: {'line': b'/home/sailbot/.local/lib/python3.6/site-packages/setuptools/command/install.py:37: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.\n'}
+[4.468382] (low_level) StderrLine: {'line': b'  setuptools.SetuptoolsDeprecationWarning,\n'}
+[4.469491] (low_level) StdoutLine: {'line': b'running install_lib\n'}
+[4.472635] (sailbot) StdoutLine: {'line': b"writing manifest file '../../../build/sailbot/sailbot.egg-info/SOURCES.txt'\n"}
+[4.473473] (sailbot) StdoutLine: {'line': b'running build\n'}
+[4.473966] (sailbot) StdoutLine: {'line': b'running build_py\n'}
+[4.475944] (low_level) StdoutLine: {'line': b'byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/station_keeping_target_gen.py to station_keeping_target_gen.cpython-36.pyc\n'}
+[4.478284] (low_level) StdoutLine: {'line': b'running install_data\n'}
+[4.479112] (sailbot) StdoutLine: {'line': b'running install\n'}
+[4.479835] (sailbot) StderrLine: {'line': b'/home/sailbot/.local/lib/python3.6/site-packages/setuptools/command/install.py:37: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.\n'}
+[4.480358] (sailbot) StderrLine: {'line': b'  setuptools.SetuptoolsDeprecationWarning,\n'}
+[4.481277] (sailbot) StdoutLine: {'line': b'running install_lib\n'}
+[4.481962] (low_level) StdoutLine: {'line': b'running install_egg_info\n'}
+[4.487604] (sailbot) StdoutLine: {'line': b'byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/trim_tab_comms.py to trim_tab_comms.cpython-36.pyc\n'}
+[4.488487] (low_level) StdoutLine: {'line': b"removing '/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level-0.0.0-py3.6.egg-info' (and everything under it)\n"}
+[4.490001] (low_level) StdoutLine: {'line': b'Copying ../../../build/low_level/low_level.egg-info to /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level-0.0.0-py3.6.egg-info\n'}
+[4.491926] (sailbot) StdoutLine: {'line': b'byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/airmar_reader.py to airmar_reader.cpython-36.pyc\n'}
+[4.494210] (low_level) StdoutLine: {'line': b'running install_scripts\n'}
+[4.495779] (sailbot) StdoutLine: {'line': b'byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/debug_interface.py to debug_interface.cpython-36.pyc\n'}
+[4.499141] (sailbot) StdoutLine: {'line': b'byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/control_system.py to control_system.cpython-36.pyc\n'}
+[4.504697] (sailbot) StdoutLine: {'line': b'running install_data\n'}
+[4.507507] (sailbot) StdoutLine: {'line': b'running install_egg_info\n'}
+[4.514433] (sailbot) StdoutLine: {'line': b"removing '/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot-1.0.0-py3.6.egg-info' (and everything under it)\n"}
+[4.515675] (sailbot) StdoutLine: {'line': b'Copying ../../../build/sailbot/sailbot.egg-info to /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot-1.0.0-py3.6.egg-info\n'}
+[4.519397] (sailbot) StdoutLine: {'line': b'running install_scripts\n'}
+[4.530656] (-) TimerEvent: {}
+[4.579535] (low_level) StdoutLine: {'line': b'Installing desired_heading script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.580430] (low_level) StdoutLine: {'line': b'Installing point2point script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.581357] (low_level) StdoutLine: {'line': b'Installing rudder_control script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.582102] (low_level) StdoutLine: {'line': b'Installing rudder_test script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.582812] (low_level) StdoutLine: {'line': b'Installing station_target_gen script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.583430] (low_level) StdoutLine: {'line': b'Installing target_gen script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.584418] (low_level) StdoutLine: {'line': b'Installing target_location script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.585075] (low_level) StdoutLine: {'line': b'Installing tt_state_pub script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level\n'}
+[4.585874] (low_level) StdoutLine: {'line': b"writing list of installed files to '/home/sailbot/sailbot21-22/build/low_level/install.log'\n"}
+[4.605171] (sailbot) StdoutLine: {'line': b'Installing airmar_reader script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot\n'}
+[4.606587] (sailbot) StdoutLine: {'line': b'Installing control_system script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot\n'}
+[4.607307] (sailbot) StdoutLine: {'line': b'Installing debug_interface script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot\n'}
+[4.608184] (sailbot) StdoutLine: {'line': b'Installing pwm_controller script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot\n'}
+[4.609153] (sailbot) StdoutLine: {'line': b'Installing serial_rc_receiver script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot\n'}
+[4.609910] (sailbot) StdoutLine: {'line': b'Installing trim_tab_comms script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot\n'}
+[4.611413] (sailbot) StdoutLine: {'line': b"writing list of installed files to '/home/sailbot/sailbot21-22/build/sailbot/install.log'\n"}
+[4.630940] (-) TimerEvent: {}
+[4.701552] (low_level) CommandEnded: {'returncode': 0}
+[4.731101] (-) TimerEvent: {}
+[4.767522] (low_level) JobEnded: {'identifier': 'low_level', 'rc': 0}
+[4.776422] (sailbot) CommandEnded: {'returncode': 0}
+[4.809677] (sailbot) JobEnded: {'identifier': 'sailbot', 'rc': 0}
+[4.813554] (-) EventReactorShutdown: {}

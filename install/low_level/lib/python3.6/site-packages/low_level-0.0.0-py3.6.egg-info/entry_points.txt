@@ -1,0 +1,10 @@
+[console_scripts]
+desired_heading = low_level.desired_heading_publisher:main
+point2point = low_level.point_to_point:main
+rudder_control = low_level.rudder_control:main
+rudder_test = low_level.rudder_test:main
+station_target_gen = low_level.station_keeping_target_gen:main
+target_gen = low_level.target_generation:main
+target_location = low_level.lat_long_publisher:main
+tt_state_pub = low_level.standalone_trim_tab_state_publisher:main
+
