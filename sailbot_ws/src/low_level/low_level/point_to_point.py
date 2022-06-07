@@ -36,7 +36,6 @@ class HeadingPublisher(Node):
         :param msg: message from target generation node
         """
         self.target_pos = msg
-        self.get_logger().info(msg)
 
     def airmar_callback(self, msg):
         """
@@ -47,8 +46,8 @@ class HeadingPublisher(Node):
         if "Latitude" in msg_dict:
             self.current_pos.x = float(msg_dict["Latitude"])
             self.current_pos.y = float(msg_dict["Longitude"])
-        elif "wind-angle-true" in msg_dict:
-            self.wind_angle = float(msg_dict["wind-angle-true"])
+        elif "trueWind" in msg_dict:
+            self.wind_angle = float(msg_dict["trueWind"]["direction"])
 
     def calc_target_angle(self):
         """
