@@ -3,3 +3,6 @@
 sailbot_ws/build/*
 sailbot_ws/install/*
 sailbot_ws/log/*
+build/*
+install/*
+log/*
