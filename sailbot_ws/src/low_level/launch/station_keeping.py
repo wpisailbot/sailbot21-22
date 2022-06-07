@@ -24,8 +24,8 @@ def generate_launch_description():
         ),
         Node(
             package='low_level',
-            node_executable='target_gen',
-            name='target_gen'
+            node_executable='station_target_gen',
+            name='station_target_gen'
         ),
         Node(
             package='low_level',

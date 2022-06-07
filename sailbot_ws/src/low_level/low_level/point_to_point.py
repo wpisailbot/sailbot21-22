@@ -17,7 +17,7 @@ class HeadingPublisher(Node):
         self.airmar_subscription = self.create_subscription(String, 'airmar_data', self.airmar_callback, 15)
         self.target_subscrption = self.create_subscription(Point, "target_position", self.target_callback, 15)
         # set how often heading is recalculated
-        timer_period = 30  # seconds
+        timer_period = 3  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         # internal variables
         self.wind_angle = 0.0
@@ -46,8 +46,8 @@ class HeadingPublisher(Node):
         if "Latitude" in msg_dict:
             self.current_pos.x = float(msg_dict["Latitude"])
             self.current_pos.y = float(msg_dict["Longitude"])
-        elif "trueWind" in msg_dict:
-            self.wind_angle = float(msg_dict["trueWind"]["direction"])
+        elif "wind-angle-true" in msg_dict:
+            self.wind_angle = float(msg_dict["wind-angle-true"])
 
     def calc_target_angle(self):
         """

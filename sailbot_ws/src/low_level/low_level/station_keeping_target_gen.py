@@ -20,7 +20,7 @@ class TargetFinder(Node):
         # this is a bad way of doing it
         # fill this in
         self.point1 = Point()
-        self.point1.x, self.point1.y = 0.0, 0.0
+        self.point1.x, self.point1.y = 42.27658231952161, -71.75672237621961
 
     def airmar_callback(self, msg):
         msg_dict = json.loads(msg.data)

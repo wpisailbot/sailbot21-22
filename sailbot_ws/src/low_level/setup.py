@@ -28,7 +28,8 @@ setup(
             'point2point = low_level.point_to_point:main',
             'target_location = low_level.lat_long_publisher:main',
             'tt_state_pub = low_level.standalone_trim_tab_state_publisher:main',
-            'target_gen = low_level.target_generation:main'
+            'target_gen = low_level.target_generation:main',
+            'station_target_gen = low_level.station_keeping_target_gen:main'
         ],
     },
 )
