@@ -1,6 +1,0 @@
-source;share/sailbot/hook/pythonpath.ps1
-source;share/sailbot/hook/pythonpath.dsv
-source;share/sailbot/hook/pythonpath.sh
-source;share/sailbot/hook/ament_prefix_path.ps1
-source;share/sailbot/hook/ament_prefix_path.dsv
-source;share/sailbot/hook/ament_prefix_path.sh
