@@ -1,0 +1,36 @@
+[3.086s] Invoking command in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level': PYTHONPATH=/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/low_level build --build-base /home/sailbot/sailbot21-22/build/low_level/build install --prefix /home/sailbot/sailbot21-22/install/low_level --record /home/sailbot/sailbot21-22/build/low_level/install.log --single-version-externally-managed
+[4.345s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead
+[4.346s]   % (opt, underscore_opt)
+[4.347s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'install-scripts' will not be supported in future versions. Please use the underscore name 'install_scripts' instead
+[4.348s]   % (opt, underscore_opt)
+[4.524s] running egg_info
+[4.527s] writing ../../../build/low_level/low_level.egg-info/PKG-INFO
+[4.530s] writing dependency_links to ../../../build/low_level/low_level.egg-info/dependency_links.txt
+[4.531s] writing entry points to ../../../build/low_level/low_level.egg-info/entry_points.txt
+[4.532s] writing requirements to ../../../build/low_level/low_level.egg-info/requires.txt
+[4.532s] writing top-level names to ../../../build/low_level/low_level.egg-info/top_level.txt
+[4.541s] reading manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'
+[4.549s] writing manifest file '../../../build/low_level/low_level.egg-info/SOURCES.txt'
+[4.549s] running build
+[4.550s] running build_py
+[4.553s] running install
+[4.554s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/command/install.py:37: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[4.555s]   setuptools.SetuptoolsDeprecationWarning,
+[4.556s] running install_lib
+[4.563s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/point_to_point.py to point_to_point.cpython-36.pyc
+[4.568s] byte-compiling /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level/station_keeping_target_gen.py to station_keeping_target_gen.cpython-36.pyc
+[4.570s] running install_data
+[4.575s] running install_egg_info
+[4.588s] removing '/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level-0.0.0-py3.6.egg-info' (and everything under it)
+[4.589s] Copying ../../../build/low_level/low_level.egg-info to /home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages/low_level-0.0.0-py3.6.egg-info
+[4.590s] running install_scripts
+[4.674s] Installing desired_heading script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.676s] Installing point2point script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.678s] Installing rudder_control script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.679s] Installing rudder_test script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.680s] Installing station_target_gen script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.681s] Installing target_gen script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.685s] Installing target_location script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.686s] Installing tt_state_pub script to /home/sailbot/sailbot21-22/install/low_level/lib/low_level
+[4.688s] writing list of installed files to '/home/sailbot/sailbot21-22/build/low_level/install.log'
+[4.813s] Invoked command in '/home/sailbot/sailbot21-22/sailbot_ws/src/low_level' returned '0': PYTHONPATH=/home/sailbot/sailbot21-22/install/low_level/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/low_level build --build-base /home/sailbot/sailbot21-22/build/low_level/build install --prefix /home/sailbot/sailbot21-22/install/low_level --record /home/sailbot/sailbot21-22/build/low_level/install.log --single-version-externally-managed

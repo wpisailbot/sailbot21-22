@@ -1,0 +1,36 @@
+[2.998s] Invoking command in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot': PYTHONPATH=/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/sailbot build --build-base /home/sailbot/sailbot21-22/build/sailbot/build install --prefix /home/sailbot/sailbot21-22/install/sailbot --record /home/sailbot/sailbot21-22/build/sailbot/install.log --single-version-externally-managed
+[4.244s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead
+[4.245s]   % (opt, underscore_opt)
+[4.246s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/dist.py:720: UserWarning: Usage of dash-separated 'install-scripts' will not be supported in future versions. Please use the underscore name 'install_scripts' instead
+[4.247s]   % (opt, underscore_opt)
+[4.422s] running egg_info
+[4.425s] writing ../../../build/sailbot/sailbot.egg-info/PKG-INFO
+[4.426s] writing dependency_links to ../../../build/sailbot/sailbot.egg-info/dependency_links.txt
+[4.427s] writing entry points to ../../../build/sailbot/sailbot.egg-info/entry_points.txt
+[4.428s] writing requirements to ../../../build/sailbot/sailbot.egg-info/requires.txt
+[4.429s] writing top-level names to ../../../build/sailbot/sailbot.egg-info/top_level.txt
+[4.437s] reading manifest file '../../../build/sailbot/sailbot.egg-info/SOURCES.txt'
+[4.444s] writing manifest file '../../../build/sailbot/sailbot.egg-info/SOURCES.txt'
+[4.445s] running build
+[4.446s] running build_py
+[4.451s] running install
+[4.451s] /home/sailbot/.local/lib/python3.6/site-packages/setuptools/command/install.py:37: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[4.452s]   setuptools.SetuptoolsDeprecationWarning,
+[4.453s] running install_lib
+[4.459s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/trim_tab_comms.py to trim_tab_comms.cpython-36.pyc
+[4.463s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/airmar_reader.py to airmar_reader.cpython-36.pyc
+[4.467s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/debug_interface.py to debug_interface.cpython-36.pyc
+[4.470s] byte-compiling /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot/control_system.py to control_system.cpython-36.pyc
+[4.476s] running install_data
+[4.478s] running install_egg_info
+[4.487s] removing '/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot-1.0.0-py3.6.egg-info' (and everything under it)
+[4.505s] Copying ../../../build/sailbot/sailbot.egg-info to /home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages/sailbot-1.0.0-py3.6.egg-info
+[4.506s] running install_scripts
+[4.579s] Installing airmar_reader script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.580s] Installing control_system script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.581s] Installing debug_interface script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.581s] Installing pwm_controller script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.582s] Installing serial_rc_receiver script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.583s] Installing trim_tab_comms script to /home/sailbot/sailbot21-22/install/sailbot/lib/sailbot
+[4.585s] writing list of installed files to '/home/sailbot/sailbot21-22/build/sailbot/install.log'
+[4.762s] Invoked command in '/home/sailbot/sailbot21-22/sailbot_ws/src/sailbot' returned '0': PYTHONPATH=/home/sailbot/sailbot21-22/install/sailbot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../../build/sailbot build --build-base /home/sailbot/sailbot21-22/build/sailbot/build install --prefix /home/sailbot/sailbot21-22/install/sailbot --record /home/sailbot/sailbot21-22/build/sailbot/install.log --single-version-externally-managed

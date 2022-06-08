@@ -64,7 +64,9 @@ class HeadingPublisher(Node):
         X = math.cos(theta_b) * delta_l
         Y = math.cos(theta_a) * math.sin(theta_b) - math.sin(theta_a) * math.cos(theta_b) * math.cos(delta_l)
 
-        return math.radians(math.atan2(X, Y))
+        self.get_logger().info("heading to target: {}".format(math.degrees(math.atan2(X, Y))))
+
+        return math.degrees(math.atan2(X, Y))
 
     @staticmethod
     def polar_to_cart(angle, mag):
@@ -133,6 +135,8 @@ class HeadingPublisher(Node):
             target_vector_norm = np.sqrt(sum(target_vector ** 2))
             proj_velocity_on_target = np.dot(velocity_vector, target_vector) / target_vector_norm
 
+            self.get_logger().info("heading: {}, val: {}".format(heading, proj_velocity_on_target))
+
             # keep the heading that gets us there the quickest
             if proj_velocity_on_target > max_projection:
                 best_heading = heading
@@ -153,6 +157,8 @@ class HeadingPublisher(Node):
         msg = Int64()
         target_angle = self.calc_target_angle()
         headings = self.calculate_heading_velocities()
+        #for heading in headings:
+        #    self.get_logger().info(str(heading))
         best_heading = self.calc_best_heading(target_angle, headings)
         msg.data = int(best_heading)
         self.publisher_.publish(msg)
