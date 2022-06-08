@@ -5,3 +5,4 @@ sailbot_ws/install/*
 sailbot_ws/log/*
 build/*
 log/*
+install/*
