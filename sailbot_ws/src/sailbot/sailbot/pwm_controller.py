@@ -69,7 +69,7 @@ class PCA9685:
   __MODE1              = 0x00
   __MODE2              = 0x01
   __PRESCALE           = 0xFE
-  __LED0_ON_L          = 0x06
+  __LED0_ON_L          = 0x06 # 0x06 through 0x09 are for PWM writing as far as I can tell -Owen
   __LED0_ON_H          = 0x07
   __LED0_OFF_L         = 0x08
   __LED0_OFF_H         = 0x09
@@ -124,8 +124,8 @@ class PCA9685:
 
   def setPWM(self, channel, on, off):
     "Sets a single PWM channel"
-    self.write(self.__LED0_ON_L+4*channel, on & 0xFF)
-    self.write(self.__LED0_ON_H+4*channel, on >> 8)
+    self.write(self.__LED0_ON_L+4*channel, on & 0xFF) # & 0xFF will return only the the least significant bit; why?
+    self.write(self.__LED0_ON_H+4*channel, on >> 8) # >> is a bit shift to turn the value into steps for PWM -Owen
     self.write(self.__LED0_OFF_L+4*channel, off & 0xFF)
     self.write(self.__LED0_OFF_H+4*channel, off >> 8)
     if (self.debug):
