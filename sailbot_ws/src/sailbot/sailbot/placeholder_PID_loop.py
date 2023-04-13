@@ -7,7 +7,6 @@ kp = 0.1
 ki = 0.01
 kd = 0.1
 
-
 def runSim():
     
     while(1):
@@ -34,7 +33,7 @@ def calculateError():
     prevErrors[0] = angleError
 
     integralAngleError = sum(prevErrors)
-    derivativeAngleError = (angleError - prevErrors[1])/0.5 # Change 0.5 to avg time between changes [or just delete derivative lol]
+    derivativeAngleError = (angleError - prevErrors[1])*0.01 # Change 0.01 to avg time between changes [or just delete derivative lol]
 
     errorSum = angleError * kp + integralAngleError * ki + derivativeAngleError * kd
     
